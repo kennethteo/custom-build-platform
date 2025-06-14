@@ -45,7 +45,7 @@ This comprehensive guide documents popular application architectures for app des
 - Component communication complexity
 - Learning curve for beginners
 
-**Template**: [ReactJS Template](./reactjs/)
+**Template**: [ReactJS Template](../app-templates/reactjs/)
 
 ### 2. Micro-Frontend Architecture
 
@@ -140,7 +140,7 @@ This comprehensive guide documents popular application architectures for app des
 - Tight coupling between layers
 - Performance bottlenecks
 
-**Templates**: [.NET Template](./dotnet/), [Java Template](./java/)
+**Templates**: [.NET Template](./app-templates/dotnet/), [Java Template](./app-templates/java/)
 
 ### 2. Clean Architecture (Onion Architecture)
 
@@ -206,7 +206,7 @@ This comprehensive guide documents popular application architectures for app des
 - Data consistency challenges
 - Operational complexity
 
-**Templates**: [Node.js Template](./nodejs/), [Go Template](./go/)
+**Templates**: [Node.js Template](./app-templates/nodejs/), [Go Template](./app-templates/go/)
 
 ### 4. Serverless Architecture
 
@@ -600,11 +600,11 @@ This comprehensive guide documents popular application architectures for app des
 
 Each subdirectory contains specific implementation templates and examples:
 
-- **[.NET Core Templates](./dotnet/)** - Clean Architecture, Layered, Microservices
-- **[Node.js Templates](./nodejs/)** - Express, Fastify, Microservices
-- **[React Templates](./reactjs/)** - Component-based, Micro-frontends
-- **[Java Templates](./java/)** - Spring Boot, Clean Architecture
-- **[Go Templates](./go/)** - Gin, Echo, Microservices
+- **[.NET Core Templates](./app-templates/dotnet/)** - Clean Architecture, Layered, Microservices
+- **[Node.js Templates](./app-templates/nodejs/)** - Express, Fastify, Microservices
+- **[React Templates](./app-templates/reactjs/)** - Component-based, Micro-frontends
+- **[Java Templates](./app-templates/java/)** - Spring Boot, Clean Architecture
+- **[Go Templates](./app-templates/go/)** - Gin, Echo, Microservices
 
 ---
 

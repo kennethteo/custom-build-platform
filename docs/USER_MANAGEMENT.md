@@ -1,4 +1,4 @@
-# User Identity and Authorization Management System Design Document
+# User Identity & Authorization Management System Design Document
 
 ## 1. System Overview
 

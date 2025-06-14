@@ -8,29 +8,14 @@ This document outlines the design for a user identity and authorization manageme
 
 ### 2.1 High-Level Architecture
 
-```
-┌───────────────────┐     ┌───────────────────┐     ┌───────────────────┐
-│                   │     │                   │     │                   │
-│  Client           │     │  API Layer        │     │  Data Layer       │
-│  Applications     │◄────┤  (Express.js)     │◄────┤  (MongoDB/SQL)    │
-│                   │     │                   │     │                   │
-└───────────────────┘     └───────────┬───────┘     └───────────────────┘
-                                     │
-                          ┌──────────▼──────────┐
-                          │                     │
-                          │  Identity Service   │
-                          │                     │
-                          └─────────┬───────────┘
-                                    │
-                     ┌──────────────┴──────────────┐
-                     │                             │
-        ┌────────────▼───────────┐   ┌─────────────▼────────────┐
-        │                        │   │                          │
-        │  Authentication        │   │  Authorization           │
-        │  - Login/Signup        │   │  - Role Management       │
-        │  - Password Reset      │   │  - Permission Control    │
-        │  - MFA                 │   │  - Access Policies       │
-        └────────────────────────┘   └──────────────────────────┘
+```mermaid
+flowchart TD
+  A[Client Applications] --> B[API Layer / Express.js]
+  B --> C[Data Layer<br/> MongoDB/SQL]
+  B --> D[Identity Service]
+  D --> E[Authentication<br/>- Login/Signup<br/>- Password Reset<br/>- MFA]
+  D --> F[Authorization<br/>- Role Management<br/>- Permission Control<br/>- Access Policies]
+
 ```
 
 ### 2.2 Component Interactions

@@ -308,7 +308,7 @@ app.use((req, res, next) => {
 
 ### 9.1 Project Structure
 
-```
+```bash
 /src
   /api
     /controllers
@@ -346,7 +346,7 @@ app.use((req, res, next) => {
 
 ### 9.2 Environment Configuration
 
-```
+```env
 # .env example
 NODE_ENV=development
 PORT=3000
@@ -407,5 +407,3 @@ SMTP_PASS=password
 - Session management UI
 - Advanced audit logging
 - Risk-based authentication
-
-Would you like me to elaborate on any specific section of this design document?

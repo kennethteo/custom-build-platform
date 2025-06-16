@@ -93,7 +93,7 @@ export class UserService {
     const token = jwt.sign(
       { userId: user._id, sessionId },
       process.env.JWT_SECRET || 'default-secret',
-      { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
+      { expiresIn: process.env.JWT_EXPIRES_IN ? String(process.env.JWT_EXPIRES_IN) : '7d' } as jwt.SignOptions
     );
 
     const expiresAt = new Date();
@@ -111,6 +111,49 @@ export class UserService {
 
     // Update last login
     user.lastLogin = new Date();
+    await user.save();
+
+    return {
+      user,
+      session: {
+        sessionId,
+        token,
+        expiresAt
+      }
+    };
+  }
+
+  async createUserWithSession(
+    userData: CreateUserDTO, 
+    sessionData?: { ipAddress?: string; userAgent?: string }
+  ): Promise<{ user: IUser; session: SessionInfo }> {
+    // Create the user first
+    const user = await this.createUser(userData);
+    
+    // Create session for the new user
+    const sessionId = crypto.randomUUID();
+    const token = jwt.sign(
+      { userId: user._id, sessionId },
+      process.env.JWT_SECRET || 'default-secret',
+      { expiresIn: process.env.JWT_EXPIRES_IN ? String(process.env.JWT_EXPIRES_IN) : '7d' } as jwt.SignOptions
+    );
+
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate() + 7);
+
+    // Update user's last login and add session
+    user.lastLogin = new Date();
+    
+    // Add session to user
+    user.addSession({
+      sessionId,
+      tokenHash: crypto.createHash('sha256').update(token).digest('hex'),
+      expiresAt,
+      ipAddress: sessionData?.ipAddress,
+      userAgent: sessionData?.userAgent,
+      isActive: true
+    });
+    
     await user.save();
 
     return {

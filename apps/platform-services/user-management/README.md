@@ -5,6 +5,7 @@ A robust and scalable user management microservice built with Node.js, Express, 
 ## 🚀 Features
 
 ### Core Features
+
 - **User Registration & Authentication** - Secure user signup and login
 - **Role-Based Access Control (RBAC)** - Flexible permission system
 - **JWT Authentication** - Stateless token-based authentication
@@ -14,6 +15,7 @@ A robust and scalable user management microservice built with Node.js, Express, 
 - **User Administration** - Admin tools for user management
 
 ### Security Features
+
 - **Password Hashing** - bcrypt with salt rounds
 - **Rate Limiting** - Prevent brute force attacks
 - **Input Validation** - Zod schema validation
@@ -22,6 +24,7 @@ A robust and scalable user management microservice built with Node.js, Express, 
 - **Session Tracking** - IP and user agent logging
 
 ### Development Features
+
 - **TypeScript** - Full type safety
 - **MongoDB Integration** - Mongoose ODM
 - **Error Handling** - Centralized error management
@@ -31,7 +34,7 @@ A robust and scalable user management microservice built with Node.js, Express, 
 
 ## 📋 Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - MongoDB 5.0+
 - npm or yarn
 
@@ -101,7 +104,7 @@ LOG_LEVEL=debug
 
 ### Project Structure
 
-```
+```bash
 src/
 ├── config/
 │   └── database.ts         # MongoDB connection
@@ -132,6 +135,7 @@ src/
 ### Database Schema
 
 #### Users Collection
+
 - Personal information (email, username, names)
 - Authentication data (password hash, sessions)
 - Profile data (bio, preferences, timezone)
@@ -139,11 +143,13 @@ src/
 - Account status and verification
 
 #### Roles Collection
+
 - Role definition (name, description)
 - Embedded permissions
 - System role flag
 
 #### Permissions Collection
+
 - Permission definition (name, resource, action)
 - Conditions and restrictions
 - Categorization
@@ -164,6 +170,7 @@ src/
 Permissions follow the format: `resource.action`
 
 Examples:
+
 - `users.create` - Create new users
 - `users.read` - View user information
 - `roles.assign` - Assign roles to users
@@ -171,12 +178,14 @@ Examples:
 ## 🌐 API Endpoints
 
 ### Authentication
+
 - `POST /api/v1/auth/register` - User registration
 - `POST /api/v1/auth/login` - User login
 - `POST /api/v1/auth/logout` - User logout
 - `POST /api/v1/auth/change-password` - Change password
 
 ### User Management
+
 - `GET /api/v1/users/profile` - Get own profile
 - `PUT /api/v1/users/profile` - Update own profile
 - `GET /api/v1/users` - List all users (admin)
@@ -185,6 +194,7 @@ Examples:
 - `DELETE /api/v1/users/:id/roles` - Remove role (admin)
 
 ### Role Management
+
 - `GET /api/v1/roles` - List all roles (admin)
 - `POST /api/v1/roles` - Create role (admin)
 - `PUT /api/v1/roles/:id` - Update role (admin)
@@ -240,6 +250,7 @@ curl http://localhost:3001/health
 ```
 
 Response:
+
 ```json
 {
   "status": "OK",
@@ -300,7 +311,72 @@ For support and questions:
 
 ### Common Issues
 
-**MongoDB Connection Error**
+#### MongoDB Authentication Error: "MongoServerError: command find requires authentication"
+
+**Problem**: The application can't connect to MongoDB due to authentication issues.
+
+**Solution**: This service uses MongoDB with authentication enabled. Follow these steps:
+
+1. **Ensure MongoDB is running with authentication**:
+
+   ```bash
+   # The docker-compose.yml configures MongoDB with:
+   # - Admin user: admin/password
+   # - App user: userapp/userapp123 (created by mongo-init.js)
+   ```
+
+2. **Use the correct MongoDB URI format**:
+
+   ```bash
+   # In .env file or docker-compose.yml:
+   MONGODB_URI=mongodb://userapp:userapp123@localhost:27017/user-management
+   ```
+
+3. **Restart services to apply initialization**:
+
+   ```bash
+   # Stop all services and remove volumes
+   docker-compose down -v
+   
+   # Start MongoDB first to run initialization scripts
+   docker-compose up mongodb -d
+   
+   # Wait for MongoDB to be ready, then start all services
+   docker-compose up -d
+   ```
+
+4. **Verify the connection**:
+
+   ```bash
+   # Check application logs
+   docker-compose logs user-management
+   
+   # Should show: "✅ MongoDB connected successfully"
+   
+   # Test database connection directly
+   docker exec -it user-management-mongodb-1 mongosh "mongodb://userapp:userapp123@localhost:27017/user-management"
+   ```
+
+5. **Test API endpoints**:
+
+   ```bash
+   # Health check
+   curl http://localhost:3001/health
+   
+   # Register user
+   curl -X POST http://localhost:3001/api/v1/auth/register \
+     -H "Content-Type: application/json" \
+     -d '{"username":"test","email":"test@example.com","password":"Test123!@#"}'
+   ```
+
+**Additional Notes**:
+
+- The `mongo-init.js` script automatically creates the application user with proper permissions
+- The service includes enhanced error handling for authentication issues
+- All database operations use the dedicated `userapp` user, not the admin user
+
+#### MongoDB Connection Error
+
 ```bash
 # Check MongoDB is running
 mongosh --eval "db.adminCommand('ping')"
@@ -309,19 +385,22 @@ mongosh --eval "db.adminCommand('ping')"
 MONGODB_URI=mongodb://localhost:27017/user-management
 ```
 
-**JWT Token Errors**
+#### JWT Token Errors
+
 ```bash
 # Ensure JWT_SECRET is set in .env
 JWT_SECRET=your-super-secret-jwt-key
 ```
 
-**Permission Denied**
+#### Permission Denied
+
 ```bash
 # Check user roles and permissions
 # Ensure user has required role for the endpoint
 ```
 
-**Rate Limiting**
+#### Rate Limiting
+
 ```bash
 # Adjust rate limiting in .env
 RATE_LIMIT_MAX_REQUESTS=1000

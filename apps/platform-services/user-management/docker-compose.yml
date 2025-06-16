@@ -8,7 +8,7 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3001
-      - MONGODB_URI=mongodb://mongodb:27017/user-management
+      - MONGODB_URI=mongodb://userapp:userapp123@mongodb:27017/user-management
       - JWT_SECRET=your-super-secret-jwt-key-change-this
       - JWT_EXPIRES_IN=7d
       - RATE_LIMIT_WINDOW_MS=900000
@@ -42,7 +42,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx-dev.conf:/etc/nginx/nginx.conf:ro
+      # For production, use: - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./ssl:/etc/nginx/ssl:ro
     depends_on:
       - user-management

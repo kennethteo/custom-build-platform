@@ -39,21 +39,19 @@ export class UserController {
       res.json({
         success: true,
         data: {
-          user: {
-            id: user._id,
-            email: user.email,
-            username: user.username,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            phone: user.phone,
-            isActive: user.isActive,
-            isVerified: user.isVerified,
-            profile: user.profile,
-            roles: user.roles,
-            createdAt: user.createdAt,
-            updatedAt: user.updatedAt,
-            lastLogin: user.lastLogin
-          }
+          id: user._id,
+          email: user.email,
+          username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          phone: user.phone,
+          isActive: user.isActive,
+          isVerified: user.isVerified,
+          profile: user.profile,
+          roles: user.roles,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+          lastLogin: user.lastLogin
         }
       });
     } catch (error) {
@@ -80,16 +78,14 @@ export class UserController {
         success: true,
         message: 'Profile updated successfully',
         data: {
-          user: {
-            id: user._id,
-            email: user.email,
-            username: user.username,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            phone: user.phone,
-            profile: user.profile,
-            updatedAt: user.updatedAt
-          }
+          id: user._id,
+          email: user.email,
+          username: user.username,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          phone: user.phone,
+          profile: user.profile,
+          updatedAt: user.updatedAt
         }
       });
     } catch (error) {
@@ -141,6 +137,9 @@ export class UserController {
   getUserById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { id } = req.params;
+      if (!id) {
+        throw createError('User ID is required', 400);
+      }
       const user = await this.userService.getUserById(id);
 
       if (!user) {
@@ -178,6 +177,9 @@ export class UserController {
       const { roleId } = req.body;
       const assignedBy = req.user?.id;
 
+      if (!id) {
+        throw createError('User ID is required', 400);
+      }
       if (!roleId) {
         throw createError('Role ID is required', 400);
       }
@@ -212,6 +214,9 @@ export class UserController {
       const { id } = req.params;
       const { roleId } = req.body;
 
+      if (!id) {
+        throw createError('User ID is required', 400);
+      }
       if (!roleId) {
         throw createError('Role ID is required', 400);
       }
@@ -244,6 +249,9 @@ export class UserController {
   deactivateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { id } = req.params;
+      if (!id) {
+        throw createError('User ID is required', 400);
+      }
       const user = await this.userService.deactivateUser(id);
 
       if (!user) {
@@ -268,6 +276,9 @@ export class UserController {
   activateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const { id } = req.params;
+      if (!id) {
+        throw createError('User ID is required', 400);
+      }
       const user = await this.userService.activateUser(id);
 
       if (!user) {

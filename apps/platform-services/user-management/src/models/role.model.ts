@@ -55,11 +55,11 @@ roleSchema.methods.addPermission = function(permissionId: Types.ObjectId, permis
 };
 
 roleSchema.methods.removePermission = function(permissionId: Types.ObjectId) {
-  this.permissions = this.permissions.filter(perm => !perm.permissionId.equals(permissionId));
+  this.permissions = this.permissions.filter((perm: IPermission) => !perm.permissionId.equals(permissionId));
 };
 
 roleSchema.methods.hasPermission = function(permissionName: string): boolean {
-  return this.permissions.some(perm => perm.name === permissionName);
+  return this.permissions.some((perm: IPermission) => perm.name === permissionName);
 };
 
 // Indexes

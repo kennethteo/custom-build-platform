@@ -27,21 +27,26 @@ export class AuthController {
   register = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const validatedData = registerSchema.parse(req.body);
-      const user = await this.userService.createUser(validatedData);
+      const result = await this.userService.createUserWithSession(validatedData, {
+        ipAddress: req.ip,
+        userAgent: req.get('User-Agent')
+      });
 
       res.status(201).json({
         success: true,
         message: 'User registered successfully',
         data: {
           user: {
-            id: user._id,
-            email: user.email,
-            username: user.username,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            isVerified: user.isVerified,
-            createdAt: user.createdAt
-          }
+            id: result.user._id,
+            email: result.user.email,
+            username: result.user.username,
+            firstName: result.user.firstName,
+            lastName: result.user.lastName,
+            isVerified: result.user.isVerified,
+            createdAt: result.user.createdAt
+          },
+          token: result.session.token,
+          expiresAt: result.session.expiresAt
         }
       });
     } catch (error) {

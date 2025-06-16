@@ -51,6 +51,7 @@ npm start
 ### Authentication Routes (`/api/v1/auth`)
 
 #### Register User
+
 ```http
 POST /api/v1/auth/register
 Content-Type: application/json
@@ -65,6 +66,7 @@ Content-Type: application/json
 ```
 
 #### Login
+
 ```http
 POST /api/v1/auth/login
 Content-Type: application/json
@@ -76,12 +78,14 @@ Content-Type: application/json
 ```
 
 #### Logout
+
 ```http
 POST /api/v1/auth/logout
 Authorization: Bearer <token>
 ```
 
 #### Change Password
+
 ```http
 POST /api/v1/auth/change-password
 Authorization: Bearer <token>
@@ -96,12 +100,14 @@ Content-Type: application/json
 ### User Routes (`/api/v1/users`)
 
 #### Get Own Profile
+
 ```http
 GET /api/v1/users/profile
 Authorization: Bearer <token>
 ```
 
 #### Update Profile
+
 ```http
 PUT /api/v1/users/profile
 Authorization: Bearer <token>
@@ -126,18 +132,21 @@ Content-Type: application/json
 ```
 
 #### Get All Users (Admin)
+
 ```http
 GET /api/v1/users?page=1&limit=10&search=john
 Authorization: Bearer <admin-token>
 ```
 
 #### Get User by ID (Admin)
+
 ```http
 GET /api/v1/users/:id
 Authorization: Bearer <admin-token>
 ```
 
 #### Assign Role (Admin)
+
 ```http
 POST /api/v1/users/:id/roles
 Authorization: Bearer <admin-token>
@@ -149,6 +158,7 @@ Content-Type: application/json
 ```
 
 #### Remove Role (Admin)
+
 ```http
 DELETE /api/v1/users/:id/roles
 Authorization: Bearer <admin-token>
@@ -160,6 +170,7 @@ Content-Type: application/json
 ```
 
 #### Activate/Deactivate User (Admin)
+
 ```http
 PATCH /api/v1/users/:id/activate
 PATCH /api/v1/users/:id/deactivate
@@ -169,12 +180,14 @@ Authorization: Bearer <admin-token>
 ### Role Routes (`/api/v1/roles`)
 
 #### Get All Roles (Admin)
+
 ```http
 GET /api/v1/roles
 Authorization: Bearer <admin-token>
 ```
 
 #### Create Role (Admin)
+
 ```http
 POST /api/v1/roles
 Authorization: Bearer <admin-token>
@@ -188,6 +201,7 @@ Content-Type: application/json
 ```
 
 #### Update Role (Admin)
+
 ```http
 PUT /api/v1/roles/:id
 Authorization: Bearer <admin-token>
@@ -200,6 +214,7 @@ Content-Type: application/json
 ```
 
 #### Delete Role (Admin)
+
 ```http
 DELETE /api/v1/roles/:id
 Authorization: Bearer <admin-token>
@@ -208,6 +223,7 @@ Authorization: Bearer <admin-token>
 ## Response Format
 
 ### Success Response
+
 ```json
 {
   "success": true,
@@ -219,6 +235,7 @@ Authorization: Bearer <admin-token>
 ```
 
 ### Error Response
+
 ```json
 {
   "success": false,
@@ -237,7 +254,7 @@ Authorization: Bearer <admin-token>
 
 ## Default Admin User
 
-- **Email**: admin@customplatform.com
+- **Email**: <admin@customplatform.com>
 - **Username**: admin
 - **Password**: Admin123!@# (Change immediately!)
 

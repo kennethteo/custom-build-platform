@@ -72,7 +72,7 @@ const userRoleSchema = new Schema<IUserRole>({
 });
 
 const userSessionSchema = new Schema<IUserSession>({
-  sessionId: { type: String, required: true, unique: true },
+  sessionId: { type: String, required: true },
   tokenHash: { type: String, required: true },
   expiresAt: { type: Date, required: true },
   ipAddress: { type: String },
@@ -168,11 +168,11 @@ userSchema.methods.addRole = function(roleId: Types.ObjectId, roleName: string, 
 };
 
 userSchema.methods.removeRole = function(roleId: Types.ObjectId) {
-  this.roles = this.roles.filter(role => !role.roleId.equals(roleId));
+  this.roles = this.roles.filter((role: IUserRole) => !role.roleId.equals(roleId));
 };
 
 userSchema.methods.hasRole = function(roleName: string): boolean {
-  return this.roles.some(role => role.name === roleName);
+  return this.roles.some((role: IUserRole) => role.name === roleName);
 };
 
 userSchema.methods.addSession = function(sessionData: Omit<IUserSession, 'createdAt'>) {
@@ -183,12 +183,12 @@ userSchema.methods.addSession = function(sessionData: Omit<IUserSession, 'create
 };
 
 userSchema.methods.removeSession = function(sessionId: string) {
-  this.sessions = this.sessions.filter(session => session.sessionId !== sessionId);
+  this.sessions = this.sessions.filter((session: IUserSession) => session.sessionId !== sessionId);
 };
 
 userSchema.methods.clearExpiredSessions = function() {
   const now = new Date();
-  this.sessions = this.sessions.filter(session => session.expiresAt > now && session.isActive);
+  this.sessions = this.sessions.filter((session: IUserSession) => session.expiresAt > now && session.isActive);
 };
 
 // Indexes
@@ -196,7 +196,7 @@ userSchema.index({ email: 1 });
 userSchema.index({ username: 1 });
 userSchema.index({ isActive: 1 });
 userSchema.index({ 'roles.name': 1 });
-userSchema.index({ 'sessions.sessionId': 1 });
+userSchema.index({ 'sessions.sessionId': 1 }, { sparse: true });
 userSchema.index({ 'sessions.expiresAt': 1 });
 
 export const User = model<IUser>('User', userSchema);

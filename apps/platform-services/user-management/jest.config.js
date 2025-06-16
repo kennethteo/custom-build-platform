@@ -1,24 +1,31 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  roots: ['<rootDir>/src', '<rootDir>/testing'],
-  testMatch: ['**/__tests__/**/*.ts', '**/?(*.)+(spec|test).ts', '**/?(*.)+(spec|test).js'],
+  roots: ['<rootDir>/src', '<rootDir>/tests'],
+  testMatch: [
+    '**/__tests__/**/*.ts',
+    '**/?(*.)+(spec|test).ts'
+  ],
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
+  setupFilesAfterEnv: ['<rootDir>/tests/setup/jest.setup.ts'],
   collectCoverageFrom: [
     'src/**/*.ts',
     '!src/**/*.d.ts',
+    '!src/index.ts',
+    '!src/scripts/**',
   ],
-  setupFilesAfterEnv: ['<rootDir>/testing/setup.js'],
-  testTimeout: 30000,
-  // Set test environment variables
-  setupFiles: ['<rootDir>/testing/env-setup.js'],
-  // Handle open handles and force exit
-  forceExit: true,
-  detectOpenHandles: true,
-  // Ensure tests exit cleanly
-  clearMocks: true,
-  resetMocks: true,
-  restoreMocks: true,
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov', 'html'],
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80
+    }
+  },
+  testTimeout: 10000,
+  verbose: true
 };

@@ -175,23 +175,23 @@ export const userSearchSchema = z.object({
   page: z.number()
     .int('Page must be an integer')
     .min(1, 'Page must be at least 1')
-    .default(1)
-    .optional(),
+    .optional()
+    .default(1),
 
   limit: z.number()
     .int('Limit must be an integer')
     .min(1, 'Limit must be at least 1')
     .max(USER_CONSTANTS.MAX_PAGE_SIZE, `Limit cannot exceed ${USER_CONSTANTS.MAX_PAGE_SIZE}`)
-    .default(USER_CONSTANTS.DEFAULT_PAGE_SIZE)
-    .optional(),
+    .optional()
+    .default(USER_CONSTANTS.DEFAULT_PAGE_SIZE),
 
   sortBy: z.enum(['email', 'username', 'firstName', 'lastName', 'status', 'createdAt', 'lastLogin'])
-    .default('createdAt')
-    .optional(),
+    .optional()
+    .default('createdAt'),
 
   sortOrder: z.enum(['asc', 'desc'])
-    .default('desc')
-    .optional(),
+    .optional()
+    .default('desc'),
 
   filters: z.object({
     status: z.array(z.enum(['active', 'inactive', 'pending', 'suspended'])).optional(),

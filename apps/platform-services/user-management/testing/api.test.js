@@ -283,6 +283,34 @@ describe('User Management Service API', () => {
   });
 
   describe('Role Management', () => {
+    beforeAll(async () => {
+      // Ensure we have admin token and user ID for role management tests
+      if (!adminToken) {
+        const adminLoginResponse = await request(app)
+          .post('/api/v1/auth/login')
+          .send(adminCredentials);
+        
+        if (adminLoginResponse.status === 200) {
+          adminToken = adminLoginResponse.body.data.token;
+        }
+      }
+      
+      // Ensure we have a user ID for testing (create a test user if needed)
+      if (!userId) {
+        // Clean up any existing test users first
+        await cleanupTestUsers();
+        
+        const registerResponse = await request(app)
+          .post('/api/v1/auth/register')
+          .send(testUser);
+        
+        if (registerResponse.status === 201) {
+          userId = registerResponse.body.data.user.id;
+          authToken = registerResponse.body.data.token;
+        }
+      }
+    });
+
     test('GET /api/v1/roles should return all roles for admin', async () => {
       const response = await request(app)
         .get('/api/v1/roles')
@@ -290,10 +318,11 @@ describe('User Management Service API', () => {
         .expect(200);
 
       expect(response.body.success).toBe(true);
-      expect(Array.isArray(response.body.data)).toBe(true);
+      expect(response.body.data).toHaveProperty('roles');
+      expect(Array.isArray(response.body.data.roles)).toBe(true);
       
-      if (response.body.data.length > 0) {
-        roleId = response.body.data[0]._id;
+      if (response.body.data.roles.length > 0) {
+        roleId = response.body.data.roles[0].id;
       }
     });
 
@@ -311,9 +340,10 @@ describe('User Management Service API', () => {
         .expect(201);
 
       expect(response.body.success).toBe(true);
-      expect(response.body.data.name).toBe(roleData.name);
+      expect(response.body.data).toHaveProperty('role');
+      expect(response.body.data.role.name).toBe(roleData.name);
       
-      newRoleId = response.body.data._id;
+      newRoleId = response.body.data.role.id;
     });
 
     test('PUT /api/v1/roles/:id should update role', async () => {
@@ -329,7 +359,8 @@ describe('User Management Service API', () => {
         .expect(200);
 
       expect(response.body.success).toBe(true);
-      expect(response.body.data.name).toBe(updateData.name);
+      expect(response.body.data).toHaveProperty('role');
+      expect(response.body.data.role.name).toBe(updateData.name);
     });
 
     test('POST /api/v1/users/:id/roles should assign role to user', async () => {

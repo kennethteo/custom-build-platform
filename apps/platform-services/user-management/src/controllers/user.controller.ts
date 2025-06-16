@@ -6,7 +6,7 @@ import { z } from 'zod';
 const updateProfileSchema = z.object({
   firstName: z.string().optional(),
   lastName: z.string().optional(),
-  phone: z.string().optional(),
+  phone: z.string().regex(/^\+?[\d\s-()]+$/, 'Invalid phone number format').optional(),
   profile: z.object({
     bio: z.string().optional(),
     timezone: z.string().optional(),

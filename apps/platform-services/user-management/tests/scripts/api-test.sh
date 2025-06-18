@@ -11,7 +11,7 @@
         }')dpoints
 
 # Configuration
-BASE_URL="http://localhost:3001"
+BASE_URL="http://localhost:3002"
 CONTENT_TYPE="Content-Type: application/json"
 
 # Colors for output

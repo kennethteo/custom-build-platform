@@ -125,3 +125,4 @@ secrets.json
 # Temporary files
 tmp/
 temp/
+apps/platform-services/management-console/.next

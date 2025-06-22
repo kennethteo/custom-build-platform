@@ -49,6 +49,14 @@ Key features include:
   - **Modularity**: Design components to be independent and reusable. The platform will be composed of independent, reusable components that can be developed, tested, and deployed separately. This approach enables easier maintenance, faster development cycles, and the flexibility to upgrade or replace individual modules without impacting the entire system.
   - **Scalability**: Ensure the platform can handle increasing workloads efficiently. The system is designed to efficiently handle increasing workloads by supporting horizontal and vertical scaling. Services can be distributed across multiple nodes, and resources can be dynamically allocated to meet demand, ensuring consistent performance as usage grows.
   - **Security**: Implement strong security measures to protect data and systems. Security is integrated at every layer of the platform, including strong authentication and authorization mechanisms, data encryption in transit and at rest, and regular security audits. The platform adheres to industry best practices and compliance standards to protect sensitive data and prevent unauthorized access.
+  - **Resiliency**: Ensure the platform can recover quickly from failures and maintain continuous operation. Resiliency is achieved through strategies such as redundancy, failover mechanisms, and automated recovery processes. The platform is designed to handle unexpected disruptions gracefully, minimizing downtime and impact on users. This include:
+    - Implementing multi-region deployments to ensure availability during regional outages.
+    - Utilizing distributed systems and replication to safeguard data integrity.
+    - Monitoring system health and performance to detect and address issues proactively.
+    - Designing services with fault tolerance and self-healing capabilities.
+    - Conducting regular disaster recovery drills to validate recovery procedures.
+    - Leveraging load balancing to distribute traffic and prevent bottlenecks.
+    - Ensuring critical components have backup systems and failover configurations.
   - **Maintainability**: Facilitate easy updates and enhancements to the platform. The codebase and infrastructure are structured to facilitate easy updates, debugging, and enhancements. Clear documentation, automated testing, and standardized development practices help ensure that the platform remains reliable and adaptable to changing requirements.
   - **Interoperability**: Support integration with diverse tools and technologies. The platform is designed to seamlessly connect with a wide range of third-party systems, services, and protocols, enabling users and partners to leverage existing investments and accelerate solution delivery. For example, a partner can integrate their CRM system with the platform using REST APIs to automate customer onboarding, or a customer can connect their on-premises data warehouse via standardized connectors to enable real-time analytics. This includes:
     - Providing well-documented APIs such as REST and GraphQL, and webhooks for external integrations.
@@ -69,12 +77,12 @@ Key features include:
 
 ## 4. High-Level Architecture Diagram
 
-- Visual representation of major components and their interactions
-
 The overall architecture will be broken down into:
 
-1. Management Plane
-2. Application and Platform Services Plane
+### Platform Control Plane
+
+The Platform Control Plane is responsible for managing and orchestrating the overall operation of the Custom Build Platform. It serves as the central hub for configuration, governance, and monitoring, ensuring that all components of the platform function cohesively. 
+2. Platform Services Plane
 3. Developer Plane
 
 ## 5. Core Platform Services

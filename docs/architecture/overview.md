@@ -81,9 +81,11 @@ The overall architecture will be broken down into:
 
 ### Platform Control Plane
 
-The Platform Control Plane is responsible for managing and orchestrating the overall operation of the Custom Build Platform. It serves as the central hub for configuration, governance, and monitoring, ensuring that all components of the platform function cohesively. 
-2. Platform Services Plane
-3. Developer Plane
+The Platform Control Plane is responsible for managing and orchestrating the overall operation of the Custom Build Platform. It serves as the central hub for configuration, governance, and monitoring, ensuring that all components of the platform function cohesively.
+
+### Platform Services Plane
+
+### Developer Plane
 
 ## 5. Core Platform Services
 

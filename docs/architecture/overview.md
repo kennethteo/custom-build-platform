@@ -2,7 +2,8 @@
 
 ## 1. Introduction
 
-- Purpose of the document
+### Purpose of the document
+
 This document provides a comprehensive overview of the Custom Build Platform's architecture, serving as a foundational guide for stakeholders—including developers, architects, and project managers—to understand its design principles, core components, and operational strategies.
 
 ### High-Level Description of the Platform
@@ -75,33 +76,159 @@ Key features include:
 3. Integration and API Strategy
 4. Well-Architected Framework
 
-## 4. High-Level Architecture Diagram
+## 2. High-Level Architecture Overview
+
+### Visual Overview
+
+```mermaid
+flowchart TD
+    CP[Control Plane]
+    DXA[Digital Experience Applications]
+    AS[Application Services]
+    PS[Platform Services]
+    DEV[Developer Plane]
+
+    subgraph Digital Experience Application & Services Plane
+        DXA --> AS
+        DXA --> PS
+        AS --> PS
+    end
+
+    CP --> DXA
+    CP --> AS
+    CP --> PS
+    DEV --> DXA
+    DEV --> AS
+    DEV --> PS
+````
 
 The overall architecture will be broken down into:
 
-### Platform Control Plane
+### Custom Build Platform Control Plane
+
+```mermaid
+flowchart TD
+    A[Admin User Management]
+    T[Tenant Management]
+    AP[Application Management]
+    CP[Control Plane]
+
+    CP --> A
+    CP --> T
+    CP --> AP
+```
 
 The Platform Control Plane is responsible for managing and orchestrating the overall operation of the Custom Build Platform. It serves as the central hub for configuration, governance, and monitoring, ensuring that all components of the platform function cohesively.
 
-### Platform Services Plane
+Features include:
+
+  1. Admin User Management
+  2. Tenant Management
+  3. Application Management
+
+### Custom Build Digital Experience Application and Services Plane
+
+```mermaid
+flowchart TD
+    DXA[Digital Experience Applications]
+    AS[Application Services]
+    PS[Platform Shared Services]
+
+    subgraph Digital Experience Application & Services Plane
+        DXA
+        AS
+        PS
+    end
+
+    DXA --> AS
+    AS --> PS
+```
+
+The Custom Build Digital Experience Application and Services Plane is the layer where digital applications and services are implemented using a microservices architecture and API-driven approach.
+
+This plane is divided into three categories:
+
+1. **Digital Experience Applications**: All application with user interfaces will be placed here
+
+2. **Application Services**: These are services specific to individual applications, tailored to meet the unique requirements of each digital experience.
+
+   Examples include:
+    - Business logic and workflows specific to the application.
+    - APIs that expose application-specific functionality to external systems.
+
+3. **Platform (Shared) Services**: These are reusable services shared across multiple applications, designed to provide foundational capabilities and ensure consistency.
+
+   Examples include:
+     - Identity and access management.
+     - API gateway and integration services.
+     - Observability and monitoring tools.
+     - Security and compliance mechanisms.
+     - Data storage and analytics services.
+
+This plane is designed to be modular, scalable, and extensible, enabling seamless integration with external systems while ensuring high performance and reliability. Developers can leverage well-documented APIs, SDKs, and integration tools to build and deploy applications efficiently. The architecture supports interoperability, allowing applications to connect with diverse tools and technologies while maintaining adaptability to evolving requirements.
 
 ### Developer Plane
 
-## 5. Core Platform Services
+```mermaid
+flowchart TD
+    DEV[Developer Plane]
+    ENV[Development Environments]
+    BUILD[Build & Deployment Tools]
+    DOCS[Developer Portals & Documentation]
+    COLLAB[Collaboration & Version Control]
+    TEST[Testing & Quality Assurance]
+    MON[Monitoring & Feedback]
 
-- List and brief description of each core service (e.g., authentication, user management, API gateway, etc.)
+    DEV --> ENV
+    DEV --> BUILD
+    DEV --> DOCS
+    DEV --> COLLAB
+    DEV --> TEST
+    DEV --> MON
 
-## 6. Service Categories
+```
 
-- Identity & Access Management
-- API & Integration
-- DevOps & Automation
-- Data & Storage
-- Security & Compliance
-- Observability & Monitoring
-- Communication & Notification
-- Configuration & Feature Management
-- Billing & Analytics
+The Developer Plane is designed to empower developers with the tools, resources, and environments necessary to build, test, and deploy applications efficiently. It serves as the foundation for developer productivity and collaboration, ensuring that teams can focus on delivering high-quality solutions.
+
+Key features include:
+
+1. **Development Environments**:
+
+   - Pre-configured environments for coding, debugging, and testing.
+   - Support for local development setups and cloud-based environments.
+   - Integration with popular IDEs and code editors.
+
+2. **Build and Deployment Tools**:
+
+   - CI/CD pipelines to automate build, test, and deployment processes.
+   - Containerization tools (e.g., Docker) for consistent application packaging.
+   - Orchestration platforms (e.g., Kubernetes) for managing deployments.
+
+3. **Developer Portals and Documentation**:
+
+   - Centralized portal for accessing APIs, SDKs, and integration guides.
+   - Comprehensive documentation for platform services and features.
+   - Tutorials, examples, and best practices to accelerate development.
+
+4. **Collaboration and Version Control**:
+
+   - Integration with version control systems (e.g., Git) for code management.
+   - Tools for team collaboration, such as issue tracking and code reviews.
+   - Support for branching strategies and release workflows.
+
+5. **Testing and Quality Assurance**:
+
+   - Automated testing frameworks for unit, integration, and end-to-end tests.
+   - Tools for performance testing and security validation.
+   - Staging environments that mirror production for realistic testing scenarios.
+
+6. **Monitoring and Feedback**:
+
+   - Real-time monitoring tools to track application performance during development.
+   - Feedback loops to gather insights from users and stakeholders.
+   - Analytics dashboards to measure key metrics and identify areas for improvement.
+
+The Developer Plane is designed to be intuitive and developer-friendly, enabling teams to work efficiently while maintaining high standards of quality and security. By providing robust tools and resources, the platform fosters innovation and collaboration, ensuring that developers can deliver impactful solutions that meet business objectives.
 
 ## 7. Technology Stack
 

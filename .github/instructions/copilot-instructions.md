@@ -43,7 +43,8 @@ For each application template, follow these guidelines:
 
 ### Node.js Instructions
 ---
-Coding standards, domain knowledge, and preferences that AI should follow.
+- Refer to the `app-templates/nodejs/` folder for code samples and templates.
+- go to nodejs.instructions.md for detailed instructions.
 
 ### dotnet Instructions
 ---

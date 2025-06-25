@@ -30,6 +30,7 @@ Key features include:
   - **Innovation**: Foster a culture of creativity and continuous improvement to stay ahead in the market.
   - **Collaboration**: Encourage teamwork and open communication among stakeholders to achieve shared goals.
   - **Efficiency**: Optimize processes and resource utilization to maximize productivity and minimize waste. This includes:
+  - **User-Centric Design**: Focus on delivering value and usability for end-users.
   - **Business Agility**: Adapt quickly to changing market conditions and customer needs through flexible processes and decision-making. This includes:
     - Designing processes and systems that support quick iteration and deployment of new features.
     - Encouraging a flexible and responsive culture that embraces change and continuous improvement.
@@ -67,7 +68,6 @@ Key features include:
     - Facilitating integration with both cloud-native and on-premises systems.
     - Maintaining clear versioning and backward compatibility for APIs to minimize integration disruptions.
     - Offering SDKs and client libraries in multiple programming languages (such as Python, JavaScript/TypeScript, Java, and Go) to accelerate partner and customer adoption.
-  - **User-Centric Design**: Focus on delivering value and usability for end-users.
 
 ### Implementation through Key Strategies
 
@@ -83,23 +83,16 @@ Key features include:
 ```mermaid
 flowchart TD
     CP[Control Plane]
+    DEV[Developer Plane]
     DXA[Digital Experience Applications]
     AS[Application Services]
     PS[Platform Services]
-    DEV[Developer Plane]
 
     subgraph Digital Experience Application & Services Plane
         DXA --> AS
         DXA --> PS
         AS --> PS
     end
-
-    CP --> DXA
-    CP --> AS
-    CP --> PS
-    DEV --> DXA
-    DEV --> AS
-    DEV --> PS
 ````
 
 The overall architecture will be broken down into:

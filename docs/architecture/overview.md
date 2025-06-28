@@ -26,6 +26,22 @@ Key features include:
   - Optimize performance and reliability across all components.
 
 <!-- Guiding principles have been moved to principles.md -->
+- **Guiding Principles**:
+  - Business Guiding Principles:
+    - Customer Focus: Prioritize the needs and expectations of end-users to deliver value-driven solutions.
+    - Innovation: Foster a culture of creativity and continuous improvement to stay ahead in the market.
+    - Collaboration: Encourage teamwork and open communication among stakeholders to achieve shared goals.
+    - Efficiency: Optimize processes and resource utilization to maximize productivity and minimize waste.
+    - User-Centric Design: Focus on delivering value and usability for end-users.
+    - Business Agility: Adapt quickly to changing market conditions and customer needs through flexible processes and decision-making.
+    - Cost Optimization: Design and operate the platform to maximize value while minimizing costs.
+  - Technology Guiding Principles
+    - Modularity: Design components to be independent and reusable.
+    - Scalability: Ensure the platform can handle increasing workloads efficiently.
+    - Security: Implement strong security measures to protect data and systems.
+    - Resiliency: Ensure the platform can recover quickly from failures and maintain continuous operation.
+    - Maintainability: Facilitate easy updates and enhancements to the platform.
+    - Interoperability: Support integration with diverse tools and technologies.
 
 ### Implementation through Key Strategies
 
@@ -39,18 +55,25 @@ Key features include:
 ### Visual Overview
 
 ```mermaid
-flowchart TD
-    CP[Control Plane]
-    DEV[Developer Plane]
-    DXA[Digital Experience Applications]
-    AS[Application Services]
-    PS[Platform Services]
-
-    subgraph Digital Experience Application & Services Plane
-        DXA --> AS
-        DXA --> PS
-        AS --> PS
-    end
+block-beta
+  block
+    columns 3
+    ControlPlane["Control Plane"]:3
+    A["Admin User Management"]
+    T["Tenant Management"]
+    AP["Application Management"]
+  end
+  block
+    columns 1
+    Apps["Custom Build Digital Experience Application and Services Plane"]:3
+    DXA["Digital Experience Applications"]
+    AS["Application Services"]
+    PS["Platform Services"]
+  end
+  block
+    columns 1
+    DEV["Developer Plane"]
+  end
 ````
 
 The overall architecture will be broken down into:

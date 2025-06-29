@@ -60,4 +60,5 @@ Coding standards, domain knowledge, and preferences that AI should follow.
 
 ### Go Instructions
 ---
-Coding standards, domain knowledge, and preferences that AI should follow.
+- All code templates will go to `app-templates/go/` folder
+- go to go.instructions.md for detailed instructions.

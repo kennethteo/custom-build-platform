@@ -116,24 +116,6 @@ flowchart TD
     AS --> PS
 ```
 
-
-```mermaid
-flowchart TD
-    A[Customer Management]
-    B[Order Management]
-    C[Product Management]
-    D[Billing & Invoicing]
-    E[Reporting & Analytics]
-    F[Notification Service]
-
-    A --> B
-    B --> C
-    B --> D
-    D --> E
-    C --> E
-    F -.-> A
-    F -.-> B
-```
 The Custom Build Digital Experience Application and Services Plane is the layer where digital applications and services are implemented using a microservices architecture and API-driven approach.
 
 This plane is divided into three categories:
@@ -160,22 +142,42 @@ This plane is designed to be modular, scalable, and extensible, enabling seamles
 ### Developer Plane
 
 ```mermaid
-flowchart TD
-    DEV[Developer Plane]
-    ENV[Development Environments]
-    BUILD[Build & Deployment Tools]
-    DOCS[Developer Portals & Documentation]
-    COLLAB[Collaboration & Version Control]
-    TEST[Testing & Quality Assurance]
-    MON[Monitoring & Feedback]
+block-beta
+  block
+    columns 2
+    DCP ["Developer Control Plane"]:2
+    IDE ["IDE"]
+    CatalogPortal ["Service Catalog / API Catalog Developer Portal"]
+    Platform Source Code
+    Version control
+  end
+  
+  block
+    columns 1
+    IDP ["Integration and Delivery Plane"]:2
+    CI ["CI Pipeline"]
+    CD ["CD Pipeline"]
+    Registry
+  end 
 
-    DEV --> ENV
-    DEV --> BUILD
-    DEV --> DOCS
-    DEV --> COLLAB
-    DEV --> TEST
-    DEV --> MON
+  block
+    Monitoring ["Monitoring and Logging Plane"]
+    Observability ["Observability"]
+  end
 
+  block
+    columns 1
+    Security ["Security Plane"]
+    Vaults ["Secrets & Identity Manager"]
+  end 
+
+  block
+    Resource["Resource Plane"]
+    Compute ["Compute"]
+    Data
+    Networking
+    Messaging
+  end
 ```
 
 The Developer Plane is designed to empower developers with the tools, resources, and environments necessary to build, test, and deploy applications efficiently. It serves as the foundation for developer productivity and collaboration, ensuring that teams can focus on delivering high-quality solutions.

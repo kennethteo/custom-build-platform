@@ -13,7 +13,6 @@ The Custom Build Platform is a comprehensive solution designed to streamline the
 Key features include:
 
 - A robust architecture that facilitates efficient data flow and interoperability.
-- Comprehensive service categories that address core operational needs, such as identity management, API integration, DevOps automation, and observability.
 - A technology stack leveraging modern programming languages, frameworks, and infrastructure tools to deliver state-of-the-art solutions.
 - Built-in scalability and security measures to handle evolving demands and protect sensitive data.
 
@@ -25,7 +24,6 @@ Key features include:
   - Provide a user-friendly interface for developers and stakeholders.
   - Optimize performance and reliability across all components.
 
-<!-- Guiding principles have been moved to principles.md -->
 - **Guiding Principles**:
   - Business Guiding Principles:
     - Customer Focus: Prioritize the needs and expectations of end-users to deliver value-driven solutions.

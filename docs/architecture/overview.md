@@ -143,7 +143,8 @@ This plane is designed to be modular, scalable, and extensible, enabling seamles
 
 ```mermaid
 block-beta
-  block
+columns 1
+  block:control:1
     columns 2
     DCP ["Developer Control Plane"]:2
     IDE ["IDE"]
@@ -151,27 +152,29 @@ block-beta
     Platform Source Code
     Version control
   end
-  
-  block
-    columns 1
-    IDP ["Integration and Delivery Plane"]:2
+space  
+  block:group2:1
+    columns 3
+    IDP ["Integration and Delivery Plane"]:3
+    
     CI ["CI Pipeline"]
     CD ["CD Pipeline"]
-    Registry
+    Registry ["Registry"]
   end 
-
-  block
+space
+  block:group3:1
     Monitoring ["Monitoring and Logging Plane"]
     Observability ["Observability"]
   end
-
-  block
+space
+  block:group4:1
     columns 1
     Security ["Security Plane"]
     Vaults ["Secrets & Identity Manager"]
   end 
-
-  block
+space
+  block:group5:1
+    columns 2
     Resource["Resource Plane"]
     Compute ["Compute"]
     Data
@@ -246,65 +249,3 @@ The platform leverages a modern, modular technology stack to ensure scalability,
   - RabbitMQ, Kafka
 - **Other Tools**:  
   - ESLint, Prettier, dotenv, nodemon, Swagger UI, Joi, Lodash, Moment/date-fns
-
-## 8. Data Flow & Integration
-
-The platform supports multiple integration patterns to enable seamless data exchange and interoperability:
-
-- **Integration Approaches**:
-  - **APIs**: RESTful and GraphQL APIs for synchronous communication.
-  - **Event-Driven Architecture**: Kafka or RabbitMQ for asynchronous messaging and decoupled services.
-  - **Enterprise Service Bus (ESB)**: For orchestrating complex integrations with external systems.
-- **Data Flow**:
-  - Data flows between digital experience applications, application services, and platform services via secure APIs and message queues.
-  - External systems integrate through well-documented APIs or event streams.
-- **Integration Points**:
-  - Third-party authentication providers, external data sources, partner APIs, and cloud services.
-
-## 9. Security Considerations
-
-Security is embedded at every layer of the platform:
-
-- **Authentication & Authorization**: OAuth2, JWT, SAML, and role-based access control.
-- **Data Protection**: Encryption in transit (TLS/SSL) and at rest; secure storage of secrets using vaults or environment variables.
-- **Compliance**: Adherence to GDPR, SOC2, and other relevant standards.
-- **Vulnerability Management**: Regular dependency scanning, static code analysis, and penetration testing.
-- **API Security**: Input validation (Joi), rate limiting, CORS, and secure HTTP headers (Helmet).
-
-## 10. Scalability & Reliability
-
-The platform is designed for high availability and elastic scalability:
-
-- **Horizontal Scaling**: Services are stateless and can be scaled out across multiple nodes.
-- **Load Balancing**: Managed via Kubernetes and cloud-native load balancers.
-- **Auto-Scaling**: Dynamic resource allocation based on demand.
-- **Resiliency**: Circuit breakers, retries, and fallback mechanisms.
-- **Disaster Recovery**: Multi-region deployments, automated backups, and failover strategies.
-
-## 11. Deployment & Operations
-
-Modern DevOps practices ensure rapid, reliable delivery:
-
-- **CI/CD Pipelines**: Automated build, test, and deployment using GitHub Actions.
-- **Containerization**: All services are packaged as Docker containers.
-- **Orchestration**: Kubernetes manages deployment, scaling, and health of containers.
-- **Monitoring & Logging**: Centralized logging (ELK), metrics (Prometheus), and dashboards (Grafana).
-- **Environment Management**: Use of environment variables and secrets management for configuration.
-
-## 12. Future Enhancements
-
-- Expand support for additional programming languages and frameworks.
-- Integrate AI/ML services for advanced analytics and automation.
-- Enhance self-service capabilities in the developer portal.
-- Implement advanced cost optimization and resource governance features.
-- Strengthen zero-trust security and compliance automation.
-- Continuous improvement based on user and stakeholder feedback.
-
-## 13. References
-
-- [Project README](../../README.md)
-- [API Documentation (OpenAPI/Swagger)](../api/openapi.yaml)
-- [Developer Portal](../developer-portal/)
-- [CI/CD Pipeline Configurations](../../.github/workflows/)
-- [Platform Security Guidelines](../security/)
-- [External Integrations Guide](../integrations/)

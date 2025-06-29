@@ -52,31 +52,18 @@ Key features include:
 
 ### Visual Overview
 
-```mermaid
-block-beta
-  block
-    columns 3
-    ControlPlane["Control Plane"]:3
-    A["Admin User Management"]
-    T["Tenant Management"]
-    AP["Application Management"]
-  end
-  block
-    columns 1
-    Apps["Custom Build Digital Experience Application and Services Plane"]:3
-    DXA["Digital Experience Applications"]
-    AS["Application Services"]
-    PS["Platform Services"]
-  end
-  block
-    columns 1
-    DEV["Developer Plane"]
-  end
-````
-
 The overall architecture will be broken down into:
 
+```mermaid
+block-beta
+  ControlPlane["Control Plane"]
+  Apps["Custom Build Digital Experience Application and Services Plane"]
+  DEV["Developer Plane"]
+```
+
 ### Custom Build Platform Control Plane
+
+The Platform Control Plane is responsible for managing and orchestrating the overall operation of the Custom Build Platform. It serves as the central hub for configuration, governance, and monitoring, ensuring that all components of the platform function cohesively.
 
 ```mermaid
 block-beta
@@ -88,8 +75,6 @@ block-beta
   end
 ```
 
-The Platform Control Plane is responsible for managing and orchestrating the overall operation of the Custom Build Platform. It serves as the central hub for configuration, governance, and monitoring, ensuring that all components of the platform function cohesively.
-
 Features include:
 
   1. Admin User Management
@@ -97,6 +82,8 @@ Features include:
   3. Application Management
 
 ### Custom Build Digital Experience Application and Services Plane
+
+The Custom Build Digital Experience Application and Services Plane is the layer where digital applications and services are implemented using a microservices architecture and API-driven approach.
 
 ```mermaid
 flowchart TD
@@ -111,10 +98,18 @@ flowchart TD
     end
 
     DXA --> AS
+    DXA --> PS
     AS --> PS
 ```
 
-The Custom Build Digital Experience Application and Services Plane is the layer where digital applications and services are implemented using a microservices architecture and API-driven approach.
+```mermaid
+block-beta
+  columns 3
+  Apps["Custom Build Digital Experience Application and Services Plane"]:3
+  DXA["Digital Experience Applications"]
+  AS["Application Services"]
+  PS["Platform Services"]
+````
 
 This plane is divided into three categories:
 
@@ -139,91 +134,33 @@ This plane is designed to be modular, scalable, and extensible, enabling seamles
 
 ### Developer Plane
 
+The Developer Plane is designed to empower developers with the tools, resources, and environments necessary to build, test, and deploy applications efficiently. It serves as the foundation for developer productivity and collaboration, ensuring that teams can focus on delivering high-quality solutions.
+
 ```mermaid
 block-beta
 columns 1
-  block:control:1
-    columns 2
-    DCP ["Developer Control Plane"]:2
-    IDE ["IDE"]
-    CatalogPortal ["Service Catalog / API Catalog Developer Portal"]
-    Platform Source Code
-    Version control
-  end
-space  
-  block:group2:1
-    columns 3
-    IDP ["Integration and Delivery Plane"]:3
-    
-    CI ["CI Pipeline"]
-    CD ["CD Pipeline"]
-    Registry ["Registry"]
-  end 
-space
-  block:group3:1
-    Monitoring ["Monitoring and Logging Plane"]
-    Observability ["Observability"]
-  end
-space
-  block:group4:1
-    columns 1
+    DCP ["Developer Control Plane"]
+    IDP ["Integration and Delivery Plane"]
+    Monitoring ["Monitoring Plane"]
     Security ["Security Plane"]
-    Vaults ["Secrets & Identity Manager"]
-  end 
-space
-  block:group5:1
-    columns 2
     Resource["Resource Plane"]
-    Compute ["Compute"]
-    Data
-    Networking
-    Messaging
-  end
 ```
-
-The Developer Plane is designed to empower developers with the tools, resources, and environments necessary to build, test, and deploy applications efficiently. It serves as the foundation for developer productivity and collaboration, ensuring that teams can focus on delivering high-quality solutions.
 
 Key features include:
 
-1. **Development Environments**:
+1. **Developer Control Plane**: This sub-plane provides developers with centralized tools and resources for managing their workflows, configurations, and environments. It includes features such as version control integration, project management tools, and developer dashboards to streamline development processes.
 
-   - Pre-configured environments for coding, debugging, and testing.
-   - Support for local development setups and cloud-based environments.
-   - Integration with popular IDEs and code editors.
+2. **Integration and Delivery Plane**: Focused on CI/CD pipelines and integration workflows, this sub-plane ensures smooth transitions from development to production. It includes tools for automated testing, deployment, and integration with external systems.
 
-2. **Build and Deployment Tools**:
+3. **Monitoring Plane**: This sub-plane provides observability tools to monitor application performance, resource utilization, and system health. It includes dashboards, alerts, and analytics to ensure proactive issue resolution.
 
-   - CI/CD pipelines to automate build, test, and deployment processes.
-   - Containerization tools (e.g., Docker) for consistent application packaging.
-   - Orchestration platforms (e.g., Kubernetes) for managing deployments.
+4. **Security Plane**: Dedicated to safeguarding applications and data, this sub-plane includes tools for vulnerability scanning, access control, encryption, and compliance monitoring.
 
-3. **Developer Portals and Documentation**:
-
-   - Centralized portal for accessing APIs, SDKs, and integration guides.
-   - Comprehensive documentation for platform services and features.
-   - Tutorials, examples, and best practices to accelerate development.
-
-4. **Collaboration and Version Control**:
-
-   - Integration with version control systems (e.g., Git) for code management.
-   - Tools for team collaboration, such as issue tracking and code reviews.
-   - Support for branching strategies and release workflows.
-
-5. **Testing and Quality Assurance**:
-
-   - Automated testing frameworks for unit, integration, and end-to-end tests.
-   - Tools for performance testing and security validation.
-   - Staging environments that mirror production for realistic testing scenarios.
-
-6. **Monitoring and Feedback**:
-
-   - Real-time monitoring tools to track application performance during development.
-   - Feedback loops to gather insights from users and stakeholders.
-   - Analytics dashboards to measure key metrics and identify areas for improvement.
+5. **Resource Plane**: This sub-plane manages infrastructure resources such as compute, storage, and networking. It ensures optimal resource allocation and scalability to meet application demands.
 
 The Developer Plane is designed to be intuitive and developer-friendly, enabling teams to work efficiently while maintaining high standards of quality and security. By providing robust tools and resources, the platform fosters innovation and collaboration, ensuring that developers can deliver impactful solutions that meet business objectives.
 
-## 7. Technology Stack
+## 3. Technology Stack
 
 The platform leverages a modern, modular technology stack to ensure scalability, maintainability, and developer productivity.
 
@@ -247,3 +184,5 @@ The platform leverages a modern, modular technology stack to ensure scalability,
   - RabbitMQ, Kafka
 - **Other Tools**:  
   - ESLint, Prettier, dotenv, nodemon, Swagger UI, Joi, Lodash, Moment/date-fns
+
+## 4. Governance

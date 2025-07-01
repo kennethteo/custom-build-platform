@@ -17,6 +17,37 @@ A boilerplate for building RESTful APIs using Node.js, Express, and TypeScript. 
 - Docker support for containerization
 - Example folder structure for scalable projects
 
+## Authentication
+
+- This API is designed to work with 3rd party authentication providers (e.g., Auth0, Azure AD, Okta, Google Identity, etc.).
+- User registration and login are handled by the identity provider.
+- Clients must obtain an access token from the provider and include it in the `Authorization: Bearer <token>` header for protected endpoints.
+- The API validates incoming JWTs using the provider's public keys and checks claims (issuer, audience, scopes, etc.).
+- Example middleware for Auth0:
+
+```js
+const jwt = require('express-jwt');
+const jwksRsa = require('jwks-rsa');
+
+const checkJwt = jwt({
+  secret: jwksRsa.expressJwtSecret({
+    jwksUri: 'https://YOUR_DOMAIN/.well-known/jwks.json'
+  }),
+  audience: 'YOUR_API_AUDIENCE',
+  issuer: 'https://YOUR_DOMAIN/',
+  algorithms: ['RS256']
+});
+
+// Use checkJwt as middleware on protected routes
+router.get('/protected', checkJwt, (req, res) => {
+  res.json({ message: 'Protected data' });
+});
+```
+
+## API Versioning
+
+- The API uses versioning via the URL path, e.g., `/api/v1/resource`.
+
 ## Getting Started
 
 ### Prerequisites
@@ -24,6 +55,7 @@ A boilerplate for building RESTful APIs using Node.js, Express, and TypeScript. 
 - Node.js (v18+ recommended)
 - npm or yarn
 - [Docker](https://www.docker.com/) (optional, for containerization)
+- Account and configuration with your chosen identity provider
 
 ### Installation
 
@@ -104,6 +136,34 @@ router.post('/users', validate(createUserSchema), (req, res) => {
 module.exports = router;
 ```
 
+## Error Handling
+
+- All errors return a JSON response with a `message` and `statusCode`.
+- Example:
+
+  ```json
+  {
+    "message": "Resource not found",
+    "statusCode": 404
+  }
+  ```
+
+## Security
+
+- Uses [helmet](https://www.npmjs.com/package/helmet) for HTTP headers.
+- CORS is enabled and configurable.
+- Input validation is enforced with Joi.
+- Rate limiting is implemented to prevent abuse.
+- All authentication and authorization is delegated to the identity provider.
+
+## Example Requests
+
+Access a protected endpoint:
+
+```bash
+curl -H "Authorization: Bearer <access_token>" http://localhost:3000/api/v1/protected
+```
+
 ## Testing
 
 ```bash
@@ -118,7 +178,8 @@ npm test
 ```env
 PORT=3000
 MONGODB_URI=mongodb://localhost:27017/mydb
-JWT_SECRET=your_jwt_secret
+AUTH_DOMAIN=your-tenant.auth0.com
+AUTH_AUDIENCE=your-api-identifier
 ```
 
 ## Scripts

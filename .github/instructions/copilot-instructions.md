@@ -39,7 +39,22 @@ For each application template, follow these guidelines:
 - Ensure the application is containerized using Docker.
 - Use environment variables for configuration management.
 - Implement logging and monitoring using industry-standard tools.
-- Follow best practices for the specific programming language and framework used.
+- Follow best practices for the specific programming language and framework used.`
+
+API Security Guidelines:
+- Implement input validation and sanitization to prevent injection attacks.
+- Use HTTPS for all API endpoints.
+- Implement rate limiting to prevent abuse of APIs.
+- Use OAuth2 or JWT for secure authentication and authorization.
+- Use WebAuthn for secure API access.
+- Ensure sensitive data is encrypted both in transit and at rest.
+- Use leveled api keys for different access levels (e.g., read-only, read-write).
+- Implement authorization checks to ensure users have the necessary permissions for each API endpoint.
+- Implement API Versioning to maintain backward compatibility.
+- Considering Allowlisting IPs for sensitive APIs to restrict access.
+- Check for OWASP Top Ten vulnerabilities and implement mitigations.
+- Use API gateways for additional security features like throttling, caching, and logging.
+- Implement proper error handling and return meaningful HTTP status codes, providing clear error messages. 
 
 ### Node.js Instructions
 ---

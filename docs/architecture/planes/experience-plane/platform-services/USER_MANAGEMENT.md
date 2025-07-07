@@ -144,7 +144,9 @@ app.get('/api/admin/users', authenticate, checkRole('admin'), userController.lis
 
 ## Keycloak Features
 
-Keycloak is an open-source identity and access management solution designed for modern applications and services. It provides a comprehensive set of features for authentication, authorization, and user management:
+Keycloak is a single sign on solution for web apps and RESTful web services. The goal of Keycloak is to make security simple so that it is easy for application developers to secure the apps and services they have deployed in their organization. Security features that developers normally have to write for themselves are provided out of the box and are easily tailorable to the individual requirements of your organization. Keycloak provides customizable user interfaces for login, registration, administration, and account management. You can also use Keycloak as an integration platform to hook it into existing LDAP and Active Directory servers. You can also delegate authentication to third party identity providers like Facebook and Google.
+
+Keycloak provides a comprehensive set of features for authentication, authorization, and user management:
 
 - **Single Sign-On (SSO):**
   - Users can log in once to access multiple applications without re-authenticating.
@@ -193,6 +195,14 @@ Keycloak is an open-source identity and access management solution designed for 
 - **Extensibility:**
   - SPI (Service Provider Interfaces) for custom providers, authenticators, and event listeners.
 
+- **Audit and Event Logging:**
+  - Track authentication events, admin actions, and security events for compliance and monitoring.
+
+- **Docker and Kubernetes Ready:**
+  - Official images and Helm charts for easy deployment in containerized environments.
+
+- **High Availability and Scalability:**
+  - Clustering support and external database integration for production-grade deployments.
 - **Audit and Event Logging:**
   - Track authentication events, admin actions, and security events for compliance and monitoring.
 

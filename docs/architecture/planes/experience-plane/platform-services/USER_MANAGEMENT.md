@@ -203,9 +203,6 @@ Keycloak provides a comprehensive set of features for authentication, authorizat
 
 - **High Availability and Scalability:**
   - Clustering support and external database integration for production-grade deployments.
-- **Audit and Event Logging:**
-  - Track authentication events, admin actions, and security events for compliance and monitoring.
-
 - **Docker and Kubernetes Ready:**
   - Official images and Helm charts for easy deployment in containerized environments.
 

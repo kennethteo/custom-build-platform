@@ -124,7 +124,7 @@ const main = async () => {
         };
 
         await createClient(token, TEST_REALM, client);
-        console.log(`Client 'test-client' created in realm '${TEST_REALM}'.`);
+        console.log(`Client '${TEST_CLIENT_ID}' created in realm '${TEST_REALM}'.`);
 
         // Example user object
         const user = {

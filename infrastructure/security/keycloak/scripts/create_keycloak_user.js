@@ -141,7 +141,12 @@ const main = async () => {
         };
 
         const status = await createUser(token, TEST_REALM, user);
-        console.log(`User created in realm '${TEST_REALM}' with status: ${status}`);
+        if (status === 201) {
+            console.log(`User created in realm '${TEST_REALM}' with status: ${status}`);
+        } else {
+            console.error(`Failed to create user in realm '${TEST_REALM}'. Status: ${status}`);
+            throw new Error(`Unexpected response status: ${status}`);
+        }
     } catch (error) {
         console.error('Error:', error.response?.data || error.message);
     }

@@ -134,7 +134,7 @@ const main = async () => {
             credentials: [
                 {
                     type: 'password',
-                    value: 'Password123!',
+                    value: process.env.KEYCLOAK_TEST_USER_PASSWORD || 'Password123!',
                     temporary: false
                 }
             ]

@@ -11,6 +11,8 @@ const KEYCLOAK_ADMIN_USER = process.env.KEYCLOAK_ADMIN_USER || 'admin';
 const KEYCLOAK_ADMIN_PASSWORD = process.env.KEYCLOAK_ADMIN_PASSWORD || 'admin';
 const KEYCLOAK_CLIENT_ID = process.env.KEYCLOAK_CLIENT_ID || 'admin-cli';
 const TEST_REALM = process.env.KEYCLOAK_TEST_REALM || 'test-realm';
+const KEYCLOAK_TEST_USER_PASSWORD = process.env.KEYCLOAK_TEST_USER_PASSWORD || 'test-password';
+const TEST_CLIENT_ID = process.env.TEST_CLIENT_ID || 'test-client';
 
 /**
  * Get admin access token from Keycloak.
@@ -115,7 +117,7 @@ const main = async () => {
 
         // Example client object
         const client = {
-            clientId: 'test-client',
+            clientId: TEST_CLIENT_ID,
             enabled: true,
             publicClient: true,
             redirectUris: ['http://localhost:3000/*']

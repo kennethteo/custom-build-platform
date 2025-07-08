@@ -2,7 +2,7 @@
 
 ## 1. System Overview
 
-This document outlines the design for a user identity and authorization management system built on Node.js for the Custom Build Platform. The system will provide secure user authentication, role-based access control, and session management.
+This document outlines the design for a user identity and authorization management system for the Custom Build Platform, leveraging Keycloak as the core identity provider. The system provides secure user authentication, role-based access control, and session management, with integration to Node.js backend services.
 
 ## 2. Architecture
 
@@ -12,166 +12,69 @@ This document outlines the design for a user identity and authorization manageme
 flowchart TD
   A[Client Applications] --> B[API Layer / Express.js]
   B --> C[Data Layer<br/> MongoDB/SQL]
-  B --> D[Identity Service]
+  B --> D[Keycloak Identity Service]
   D --> E[Authentication<br/>- Login/Signup<br/>- Password Reset<br/>- MFA]
   D --> F[Authorization<br/>- Role Management<br/>- Permission Control<br/>- Access Policies]
-
 ```
 
 ### 2.2 Component Interactions
 
-- **Client Applications**: Web/mobile frontends that consume the authentication API
-- **API Layer**: Express.js REST API handling user requests
-- **Identity Service**: Core service managing user identities
-- **Authentication**: Handles verification of user credentials
-- **Authorization**: Manages permissions and access control
-- **Data Layer**: Stores user data, credentials, and permissions
+- **Client Applications**: Web/mobile frontends that use OAuth2/OIDC flows to authenticate via Keycloak
+- **API Layer**: Express.js REST API that validates JWT tokens issued by Keycloak and enforces authorization
+- **Keycloak Identity Service**: Manages user identities, authentication, roles, and permissions
+- **Authentication**: Handled by Keycloak (login, signup, password reset, MFA)
+- **Authorization**: Managed by Keycloak using roles and groups; API checks token claims for access control
+- **Data Layer**: Stores application data; user data is managed by Keycloak
 
 ## 3. Data Models
 
-### 3.1 User Schema
+> User, Role, Permission, and Session data are managed by Keycloak. Application-specific user profile extensions can be stored in your app database and linked via Keycloak user ID.
+
+### 3.1 User Profile Extension Example
 
 ```javascript
 {
-  id: String,                    // Unique identifier
-  username: String,              // Username for login
-  email: String,                 // Email address (verified status tracked separately)
-  passwordHash: String,          // Bcrypt hashed password
-  salt: String,                  // Password salt
+  keycloakId: String,             // Reference to Keycloak user
   profile: {
     firstName: String,
     lastName: String,
     avatar: String,              // URL to avatar image
     phoneNumber: String,         // Optional
   },
-  mfaEnabled: Boolean,           // Multi-factor authentication flag
-  mfaMethod: String,             // "app", "sms", etc.
-  mfaSecret: String,             // Encrypted secret for MFA
-  created: Date,                 // Account creation timestamp
-  lastLogin: Date,               // Last successful login
-  status: String,                // "active", "suspended", "pending"
-  failedLoginAttempts: Number,   // Track failed attempts for account lockout
-  passwordResetToken: String,    // For password reset functionality
-  passwordResetExpiry: Date      // Expiration for reset token
-}
-```
-
-### 3.2 Role Schema
-
-```javascript
-{
-  id: String,                    // Unique identifier
-  name: String,                  // Role name (e.g., "admin", "user")
-  description: String,           // Description of the role
-  permissions: [String],         // Array of permission identifiers
-  created: Date,                 // Creation timestamp
-  updated: Date                  // Last update timestamp
-}
-```
-
-### 3.3 Permission Schema
-
-```javascript
-{
-  id: String,                    // Unique identifier
-  resource: String,              // Resource being accessed
-  action: String,                // Action being performed (read, write, delete)
-  description: String            // Human-readable description
-}
-```
-
-### 3.4 UserRole Mapping
-
-```javascript
-{
-  userId: String,                // Reference to user
-  roleId: String,                // Reference to role
-  assignedBy: String,            // User who assigned the role
-  assignedAt: Date               // When role was assigned
-}
-```
-
-### 3.5 Session Schema
-
-```javascript
-{
-  id: String,                    // Session identifier
-  userId: String,                // Reference to user
-  token: String,                 // JWT or session token
-  ipAddress: String,             // IP address used for session
-  userAgent: String,             // User agent information
-  created: Date,                 // Session creation time
-  expires: Date,                 // Session expiry time
-  lastActive: Date               // Last activity timestamp
+  created: Date,
+  lastLogin: Date,
+  status: String                 // "active", "suspended", etc.
 }
 ```
 
 ## 4. Authentication Flows
 
-### 4.1 Registration Flow
+### 4.1 Registration & Login Flow (via Keycloak)
 
-1. Client submits registration data (username, email, password)
-2. Server validates input data
-3. Check for existing users with same username/email
-4. Hash password using bcrypt with unique salt
-5. Create new user record with status "pending"
-6. Generate email verification token
-7. Send verification email
-8. Return success response
+1. Client redirects user to Keycloak login/registration page (OIDC/OAuth2 flow)
+2. User authenticates with Keycloak (supports password, social login, MFA, etc.)
+3. Keycloak issues JWT access and refresh tokens
+4. Client/API uses access token for authenticated requests
+5. API validates token signature and claims
 
-### 4.2 Login Flow
+### 4.2 Password Reset & MFA
 
-1. User submits credentials (username/email + password)
-2. Validate credentials format
-3. Look up user by username/email
-4. Compare password hash
-5. If MFA enabled, request second factor
-6. Issue JWT token with appropriate claims
-7. Record login timestamp and session info
-8. Return token and user info (excluding sensitive data)
-
-### 4.3 Multi-Factor Authentication Flow
-
-1. After successful password verification, check if MFA is enabled
-2. Depending on MFA method:
-   - TOTP App: Request time-based code from user
-   - SMS: Send code to registered phone number
-   - Email: Send code to registered email
-3. Validate submitted code
-4. Proceed with session creation if validated
-
-### 4.4 Password Reset Flow
-
-1. User requests password reset with email address
-2. System generates unique time-limited token
-3. Send reset link with token to user's email
-4. User follows link and submits new password
-5. Verify token validity and expiration
-6. Update password hash and clear reset token
-7. Invalidate existing sessions (optional)
-8. Notify user of successful password change
+- Handled by Keycloak's built-in flows (email, TOTP, etc.)
 
 ## 5. Authorization Mechanisms
 
 ### 5.1 Role-Based Access Control (RBAC)
 
-- Users are assigned one or more roles
-- Roles contain collections of permissions
-- Permissions define allowed actions on specific resources
-- API endpoints validate permissions before processing requests
+- Roles and groups are managed in Keycloak
+- API endpoints validate user roles/permissions from JWT claims
 
-### 5.2 Permission Checking
+### 5.2 Permission Checking Example
 
 ```javascript
-// Example permission middleware
-const checkPermission = (requiredPermission) => {
-  return async (req, res, next) => {
-    const user = req.user;  // From JWT token
-    
-    // Get user roles and associated permissions
-    const userPermissions = await getUserPermissions(user.id);
-    
-    if (userPermissions.includes(requiredPermission)) {
+const checkRole = (requiredRole) => {
+  return (req, res, next) => {
+    const roles = req.user?.roles || [];
+    if (roles.includes(requiredRole)) {
       next();
     } else {
       res.status(403).json({ error: 'Permission denied' });
@@ -180,215 +83,130 @@ const checkPermission = (requiredPermission) => {
 };
 
 // Usage on routes
-app.get('/api/admin/users', 
-  authenticate, 
-  checkPermission('users:read'), 
-  userController.listUsers
-);
+app.get('/api/admin/users', authenticate, checkRole('admin'), userController.listUsers);
 ```
 
-### 5.3 JWT Structure
+### 5.3 JWT Structure (from Keycloak)
 
 ```javascript
 {
-  "header": {
-    "alg": "RS256",
-    "typ": "JWT"
-  },
-  "payload": {
-    "sub": "user_id_123",
-    "name": "John Doe",
-    "email": "john@example.com",
-    "roles": ["user", "project_admin"],
-    "iat": 1625036961,
-    "exp": 1625123361
-  },
-  "signature": "..."
+  "sub": "user_id_123",
+  "name": "John Doe",
+  "email": "john@example.com",
+  "preferred_username": "johndoe",
+  "roles": ["user", "admin"],
+  // ...other standard OIDC claims
 }
 ```
 
 ## 6. API Endpoints
 
-### 6.1 Authentication Endpoints
-
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/verify-email` - Email verification
-- `POST /api/auth/login` - User login
-- `POST /api/auth/logout` - User logout
-- `POST /api/auth/refresh-token` - Refresh access token
-- `POST /api/auth/forgot-password` - Request password reset
-- `POST /api/auth/reset-password` - Process password reset
-- `POST /api/auth/mfa/setup` - Set up MFA
-- `POST /api/auth/mfa/verify` - Verify MFA during login
-
-### 6.2 User Management Endpoints
-
-- `GET /api/users/me` - Get current user profile
-- `PUT /api/users/me` - Update current user profile
-- `PUT /api/users/me/password` - Change password
-- `GET /api/users` - List users (admin)
-- `GET /api/users/:id` - Get user details (admin)
-- `PUT /api/users/:id` - Update user (admin)
-- `DELETE /api/users/:id` - Delete user (admin)
-
-### 6.3 Role & Permission Management
-
-- `GET /api/roles` - List all roles
-- `POST /api/roles` - Create new role
-- `GET /api/roles/:id` - Get role details
-- `PUT /api/roles/:id` - Update role
-- `DELETE /api/roles/:id` - Delete role
-- `GET /api/permissions` - List all permissions
-- `POST /api/users/:id/roles` - Assign role to user
-- `DELETE /api/users/:id/roles/:roleId` - Remove role from user
+- API endpoints remain similar, but authentication and authorization are delegated to Keycloak. Use middleware to validate and decode Keycloak JWTs.
 
 ## 7. Security Considerations
 
-### 7.1 Password Storage
-
-- Use bcrypt for password hashing with work factor of 12+
-- Generate unique salt for each user
-- Never store plain text passwords
-- Implement password strength requirements
-
-### 7.2 Token Security
-
-- Use signed JWTs with RS256 algorithm
-- Keep token lifetime short (15-60 minutes)
-- Implement refresh token rotation
-- Store token fingerprints in the database for revocation
-
-### 7.3 Rate Limiting
-
-- Implement rate limiting on authentication endpoints
-- Account lockout after multiple failed attempts
-- Progressive delays for repeated failed attempts
-
-### 7.4 Secure Headers
-
-```javascript
-// Example security headers middleware
-app.use((req, res, next) => {
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
-  res.setHeader('X-XSS-Protection', '1; mode=block');
-  res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
-  res.setHeader('Content-Security-Policy', "default-src 'self'");
-  next();
-});
-```
+- Rely on Keycloak for secure password storage, MFA, and token management
+- Use HTTPS for all communications
+- Validate JWTs using Keycloak's public keys
+- Configure Keycloak security policies (password strength, brute force detection, etc.)
 
 ## 8. Technology Stack
 
+- **Identity Provider**: Keycloak (Dockerized)
 - **Backend Framework**: Express.js on Node.js
-- **Database**: MongoDB (or PostgreSQL with Sequelize)
-- **Authentication**: Passport.js, JWT
-- **Password Hashing**: bcrypt
-- **MFA**: node-2fa or speakeasy
-- **Validation**: Joi or express-validator
-- **Email Service**: Nodemailer with SMTP or third-party service
-- **Logging**: Winston or Bunyan
+- **Database**: MongoDB or PostgreSQL for app data
+- **Authentication**: OIDC/OAuth2 via Keycloak
+- **Authorization**: Role-based, managed by Keycloak
+- **Password Hashing, MFA, Email**: Handled by Keycloak
 
 ## 9. Implementation Guidelines
 
-### 9.1 Project Structure
-
-```bash
-/src
-  /api
-    /controllers
-      authController.js
-      userController.js
-      roleController.js
-    /middlewares
-      authenticate.js
-      authorize.js
-      validateRequest.js
-    /routes
-      authRoutes.js
-      userRoutes.js
-      roleRoutes.js
-  /services
-    authService.js
-    userService.js
-    roleService.js
-    emailService.js
-  /models
-    User.js
-    Role.js
-    Permission.js
-    Session.js
-  /utils
-    passwordUtils.js
-    tokenUtils.js
-    validators.js
-  /config
-    index.js
-    database.js
-  app.js
-  server.js
-```
-
-### 9.2 Environment Configuration
-
-```env
-# .env example
-NODE_ENV=development
-PORT=3000
-DB_URI=mongodb://localhost:27017/authdb
-JWT_SECRET=your-secret-key
-JWT_EXPIRES_IN=1h
-REFRESH_TOKEN_EXPIRES_IN=7d
-PASSWORD_RESET_EXPIRES_IN=1h
-EMAIL_FROM=noreply@example.com
-SMTP_HOST=smtp.example.com
-SMTP_PORT=587
-SMTP_USER=user
-SMTP_PASS=password
-```
+- Integrate Keycloak with your Node.js API using libraries like `keycloak-connect` or `express-oauth2-jwt-bearer`
+- Store only application-specific user data in your app DB; use Keycloak for all identity management
+- Use Keycloak admin console for managing users, roles, and groups
 
 ## 10. Testing Strategy
 
-### 10.1 Unit Tests
-
-- Test individual components in isolation
-- Mock dependencies
-- Focus on business logic and edge cases
-
-### 10.2 Integration Tests
-
-- Test API endpoints with actual database operations
-- Verify authentication and authorization flows
-- Test token generation and validation
-
-### 10.3 Security Testing
-
-- Password hashing verification
-- Token security tests
-- Rate limiting tests
-- Session management tests
-- Input validation and sanitation tests
+- Test OIDC/OAuth2 flows with Keycloak
+- Test API endpoints with valid/invalid JWTs
+- Test role-based access control via Keycloak roles
 
 ## 11. Deployment and Scaling
 
-### 11.1 Containerization
-
-- Use Docker for containerization
-- Docker Compose for development environment
-- Kubernetes for production deployment
-
-### 11.2 Monitoring
-
-- Implement health check endpoints
-- Track authentication failures and suspicious activities
-- Monitor session counts and database performance
-- Set up alerts for security events
+- Deploy Keycloak using Docker Compose or Kubernetes
+- Use Keycloak's clustering and external DB for high availability
 
 ## 12. Future Enhancements
 
-- OAuth2/OIDC provider integration
-- SAML federation
-- Hardware security key support
-- Session management UI
-- Advanced audit logging
-- Risk-based authentication
+- Integrate with external IdPs (Google, Azure AD, etc.) via Keycloak
+- Use Keycloak's fine-grained authorization features (policies, permissions)
+- Implement advanced audit logging via Keycloak events
+
+## Keycloak Features
+
+Keycloak is a single sign on solution for web apps and RESTful web services. The goal of Keycloak is to make security simple so that it is easy for application developers to secure the apps and services they have deployed in their organization. Security features that developers normally have to write for themselves are provided out of the box and are easily tailorable to the individual requirements of your organization. Keycloak provides customizable user interfaces for login, registration, administration, and account management. You can also use Keycloak as an integration platform to hook it into existing LDAP and Active Directory servers. You can also delegate authentication to third party identity providers like Facebook and Google.
+
+Keycloak provides a comprehensive set of features for authentication, authorization, and user management:
+
+- **Single Sign-On (SSO):**
+  - Users can log in once to access multiple applications without re-authenticating.
+  - Supports SSO across web, mobile, and RESTful APIs.
+
+- **Standard Protocols:**
+  - Supports OAuth2, OpenID Connect (OIDC), and SAML 2.0 for secure authentication and authorization.
+
+- **User Federation:**
+  - Integrate with external user stores such as LDAP and Active Directory.
+  - Synchronize users and groups from external sources.
+
+- **Social Login:**
+  - Out-of-the-box integration with social identity providers (Google, Facebook, GitHub, etc.).
+
+- **User Management:**
+  - Self-service registration, account management, and password reset.
+  - Admin console for managing users, groups, roles, and permissions.
+
+- **Role-Based Access Control (RBAC):**
+  - Define roles and map them to users and groups.
+  - Fine-grained authorization with policies and permissions.
+
+- **Multi-Factor Authentication (MFA):**
+  - Support for TOTP (Google Authenticator), SMS, and other MFA methods.
+  - Configurable authentication flows.
+
+- **Identity Brokering:**
+  - Bridge authentication from external identity providers (enterprise or social).
+
+- **Session Management:**
+  - Centralized session management with support for session revocation and logout.
+
+- **Custom Authentication Flows:**
+  - Design custom authentication and authorization flows using a flexible flow engine.
+
+- **User Consent and Account Linking:**
+  - Users can link multiple identities and manage consent for applications.
+
+- **Internationalization:**
+  - Support for multiple languages and localization of login and account pages.
+
+- **Admin and Account Consoles:**
+  - Web-based interfaces for administrators and end-users to manage settings and accounts.
+
+- **Extensibility:**
+  - SPI (Service Provider Interfaces) for custom providers, authenticators, and event listeners.
+
+- **Audit and Event Logging:**
+  - Track authentication events, admin actions, and security events for compliance and monitoring.
+
+- **Docker and Kubernetes Ready:**
+  - Official images and Helm charts for easy deployment in containerized environments.
+
+- **High Availability and Scalability:**
+  - Clustering support and external database integration for production-grade deployments.
+- **Docker and Kubernetes Ready:**
+  - Official images and Helm charts for easy deployment in containerized environments.
+
+- **High Availability and Scalability:**
+  - Clustering support and external database integration for production-grade deployments.
+
+For more details, see the [Keycloak documentation](https://www.keycloak.org/documentation).

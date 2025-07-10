@@ -2,20 +2,20 @@
 
 This document describes the Control Plane, its responsibilities, components, and operational flows.
 
-## Responsibilities
+## Capabilities
 
 - Admin User Management
 - Tenant Management
 - Application Management
-
-## Components
-
-- Central configuration
+- Identity Management
+- Metrics
+- Billing
+- Onboarding
 - Governance
 - Monitoring
 
 ## Flows
 
-- User onboarding
+- User onboarding and offboarding
 - Tenant provisioning
 - Application lifecycle management

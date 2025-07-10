@@ -5,7 +5,7 @@ build:
 	go build -o rest-api
 
 lint:
-	golangci-lint run || true
+	golangci-lint run
 
 test:
 	go test ./...

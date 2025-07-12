@@ -1,7 +1,8 @@
 ---
-applyTo: '**'
+applyTo: 'app-templates/dotnet/**,**/*.cs,**/*.csproj,**/*.sln'
+description: 'Guidelines for building .NET base applications'
 ---
-Coding standards, domain knowledge, and preferences that AI should follow.
+
 # Project Coding Standards
 ## General Guidelines
 - Use **camelCase** for variable and method names.

@@ -1,5 +1,6 @@
 ---
-applyTo: '**'
+description: 'Coding standards, domain knowledge, and preferences for Node.js development'
+applyTo: 'app-templates/nodejs/**,**/*.js,**/*.json'
 ---
 Coding standards, domain knowledge, and preferences that AI should follow.
 

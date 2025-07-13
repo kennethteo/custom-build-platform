@@ -29,4 +29,4 @@ Insert the architecture principles into a Markdown file in the docs/architecture
 
 The file should be formatted in Markdown and include headings and bullet points.
 
-If anything is unclear, ask me questions about the PRD or implementation. If you need to make assumptions, state them clearly. 
+If anything is unclear, ask me questions about the architecture principles. If you need to make assumptions, state them clearly. 

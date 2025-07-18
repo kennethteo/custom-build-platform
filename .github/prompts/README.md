@@ -1,7 +1,5 @@
 # Prompts Overview
 
-
-
 Prompt Flow for Architecture and Design
 
 /business-requirements-document

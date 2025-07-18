@@ -1,4 +1,5 @@
-Architecture Principles Template
+# Architecture Principles Template
+
 Title
 
 Insert the title of the architecture principle here

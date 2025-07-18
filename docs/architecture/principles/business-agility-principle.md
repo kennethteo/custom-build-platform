@@ -104,7 +104,7 @@ Regularly gathering and analyzing customer feedback helps prioritize features an
 
 ## References
 
-- Agile Manifesto and Principles
-- DevOps Handbook: How to Create World-Class Agility, Reliability, and Security
-- Cloud-Native Architecture Best Practices
-- Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation
+- [Agile Manifesto and Principles](https://agilemanifesto.org/)
+- [DevOps Handbook: How to Create World-Class Agility, Reliability, and Security](https://itrevolution.com/products/devops-handbook)
+- [Cloud-Native Architecture Best Practices](https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/cloud-native)
+- [Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation](https://martinfowler.com/books/continuousDelivery.html)

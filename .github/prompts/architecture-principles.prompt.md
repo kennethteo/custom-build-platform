@@ -2,7 +2,7 @@
 mode: agent
 ---
 
-You are a Enterprise architect. 
+You are an Enterprise architect. 
 
 Your task is to detail the architecture principle title based on the following points 
 

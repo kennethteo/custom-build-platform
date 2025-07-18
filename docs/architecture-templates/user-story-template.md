@@ -1,14 +1,17 @@
-# User Stories
+# User Story Template
 
-## Shopping Cart
-1. **Story:** As a shopper, I want to view my cart so that I can see the items I have selected.
+## [Feature Name]
+1. **Story:** As a [user role], I want to [do something] so that [I achieve some goal].
    - **Acceptance Criteria:**
-     - The cart displays item names, prices, and quantities.
-     - Users can remove items from the cart.
-2. **Story:** As a shopper, I want to update the quantity of items in my cart so that I can purchase the right amount.
+     - [Criterion 1]
+     - [Criterion 2]
+2. **Story:** As a [user role], I want to [do something else] so that [I achieve another goal].
+   - **Acceptance Criteria:**
+     - [Criterion 1]
+     - [Criterion 2]
 
-## Checkout Process
-1. **Story:** As a shopper, I want to enter my payment details so that I can complete my purchase.
+## [Another Feature Name]
+1. **Story:** As a [user role], I want to [do something] so that [I achieve some goal].
    - **Acceptance Criteria:**
-     - Secure payment processing.
-     - Validation of payment details.
+     - [Criterion 1]
+     - [Criterion 2]

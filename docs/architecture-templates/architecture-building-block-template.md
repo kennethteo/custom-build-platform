@@ -22,7 +22,8 @@ Relationships:
 Dependencies:
 5. Attributes
 
-Attribute Name	Description	Type	Default Value	Example Value
+| Attribute Name   | Description   | Type   | Default Value   | Example Value   |
+|------------------|--------------|--------|-----------------|----------------|
 6. Usage
 
 Explain how this architecture building block is used within the system or organization.

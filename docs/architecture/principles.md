@@ -1,8 +1,12 @@
-# Guiding Principles
+# Architecture Principles
+
+## Guiding Principles
 
 This document outlines the business and technical guiding principles for the Custom Build Platform.
 
 ## Business Guiding Principles
+
+### Customer Focus
 
 - **Customer Focus**: Prioritize the needs and expectations of end-users to deliver value-driven solutions.
 - **Innovation**: Foster a culture of creativity and continuous improvement to stay ahead in the market.

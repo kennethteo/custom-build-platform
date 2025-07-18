@@ -1,4 +1,5 @@
-Architecture Definition Document (ADD)
+# Architecture Definition Document (ADD)
+
 Document Control
 
 Project Name:
@@ -21,6 +22,7 @@ Implementation Strategy
 Risks and Mitigation
 Governance
 Conclusion
+
 1. Introduction
 
 Purpose of the document.

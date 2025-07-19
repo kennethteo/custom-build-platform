@@ -20,4 +20,9 @@ router
     .get(getExamples)
     .post(validateRequest(exampleSchema), createExample);
 
+// Add a catch-all route for unknown routes
+router.use((req, res) => {
+    res.status(404).json({ message: 'Not Found' });
+});
+
 module.exports = router;

@@ -27,7 +27,7 @@ console.error = (...args) => {
 beforeAll(async () => {
     if (mongoose.connection.readyState === 0) {
         try {
-            const mongoUri = process.env.MONGO_URI || 'mongodb://testUser:testPassword@localhost:27017/test?authSource=admin';
+            const mongoUri = process.env.MONGO_URI || 'mongodb://app_user:app_password@localhost:27017/local_database?authSource=local_database';
             await mongoose.connect(mongoUri, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true

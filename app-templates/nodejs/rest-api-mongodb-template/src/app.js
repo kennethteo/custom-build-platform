@@ -26,4 +26,9 @@ app.use((err, req, res, next) => {
     res.status(statusCode).json({ message });
 });
 
+// Add a global catch-all route for unknown routes
+app.use((req, res) => {
+    res.status(404).json({ message: 'Not Found' });
+});
+
 module.exports = app;

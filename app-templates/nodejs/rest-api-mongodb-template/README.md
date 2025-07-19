@@ -10,10 +10,17 @@ This is a REST API template built with Node.js, Express.js, and MongoDB. It prov
 - **CORS**: Enabled for cross-origin requests.
 - **Error Handling**: Centralized error handling middleware.
 
+## Additional Features
+
+- **Helmet**: Secures HTTP headers.
+- **Joi**: Validates request payloads.
+- **Winston**: Provides robust logging.
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) (v14 or later)
 - [MongoDB](https://www.mongodb.com/) (local or cloud instance)
+- [Docker](https://www.docker.com/) (optional, for containerization)
 
 ## Getting Started
 
@@ -53,7 +60,21 @@ For production:
 npm start
 ```
 
-### 5. Test the API
+### 5. Running with Docker (Optional)
+
+#### 1. Build the Docker Image
+
+```bash
+docker build -t rest-api-mongodb-template .
+```
+
+#### 2. Run the Container
+
+```bash
+docker run -p 3000:3000 --env-file .env rest-api-mongodb-template
+```
+
+### 6. Test the API
 
 Use a tool like [Postman](https://www.postman.com/) or `curl` to test the following endpoints:
 
@@ -70,6 +91,31 @@ Use a tool like [Postman](https://www.postman.com/) or `curl` to test the follow
       "description": "Example Description"
     }
     ```
+
+## API Endpoints
+
+### Example Endpoint: Create a Resource
+
+**POST** `/api/resource`
+
+#### Request Body
+
+```json
+{
+  "name": "Sample Resource",
+  "description": "This is a sample resource."
+}
+```
+
+#### Response
+
+```json
+{
+  "id": "60d21b4667d0d8992e610c85",
+  "name": "Sample Resource",
+  "description": "This is a sample resource."
+}
+```
 
 ## Project Structure
 

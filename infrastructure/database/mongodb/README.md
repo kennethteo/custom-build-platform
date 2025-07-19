@@ -1,4 +1,4 @@
-# Local Docker 
+# Local Docker
 
 ## Run MongoDB with Docker Compose
 

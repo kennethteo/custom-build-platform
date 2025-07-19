@@ -147,6 +147,24 @@ Testing is a critical part of the software development lifecycle, ensuring the q
 - **SoapUI** (API functional testing)
 - **Karate** (API testing and performance testing)
 
+### 11. Test Automation Platforms
+
+- **Keploy**: An open-source testing platform that focuses on generating test cases automatically from API traffic. It simplifies the process of creating and maintaining tests by capturing real-world interactions and replaying them for validation. Keploy is particularly useful for regression testing and ensuring backward compatibility in APIs.
+- **Features**:
+  - Automatic test case generation from API traffic.
+  - Support for mocking and stubbing external dependencies.
+  - Integration with CI/CD pipelines for continuous testing.
+  - Simplifies regression testing by replaying captured traffic.
+- **Use Cases**:
+  - Automating API regression tests without writing manual test cases.
+  - Ensuring backward compatibility during API updates.
+  - Reducing the effort required to maintain test suites.
+- **Best Practices**:
+  - Use Keploy to capture traffic in staging or production environments.
+  - Regularly update captured traffic to reflect real-world usage.
+  - Integrate Keploy into CI/CD pipelines for automated regression testing.
+- **Website**: [Keploy](https://keploy.io)
+
 ---
 
 ## Testing Best Practices

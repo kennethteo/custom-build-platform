@@ -1,0 +1,84 @@
+name: 🐛 Bug Report
+description: Report a bug or issue with the platform
+title: "[Bug]: "
+labels: ["bug"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report
+        
+        Thank you for taking the time to report a bug! This helps us improve the Custom Build Platform for everyone.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected Area
+      description: Which part of the platform is affected?
+      options:
+        - Application Templates
+        - Architecture Documentation
+        - DevSecOps Tools
+        - Infrastructure Templates
+        - Platform Documentation
+        - Build/Setup Process
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is
+      placeholder: Describe what happened and what you expected to happen
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '....'
+        3. Scroll down to '....'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: A clear and concise description of what you expected to happen
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment Information
+      description: Please provide details about your environment
+      placeholder: |
+        - OS: [e.g. Windows 10, macOS 12.0, Ubuntu 20.04]
+        - Node.js version: [e.g. 18.0.0]
+        - Browser: [e.g. Chrome 95.0, Safari 15.0]
+        - Template used: [e.g. .NET Core Multi-tenant SaaS]
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs/Screenshots
+      description: If applicable, add logs or screenshots to help explain your problem
+      placeholder: Paste any error messages or attach screenshots here
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context about the problem here

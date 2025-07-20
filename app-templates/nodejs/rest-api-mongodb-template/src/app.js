@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const morgan = require('morgan');
 const exampleRoutes = require('./routes/exampleRoutes');
 
 const app = express();
@@ -7,14 +8,27 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json()); // Parse JSON request bodies
+app.use(morgan('combined')); // Log HTTP requests
 
 // Routes
 app.use('/api/v1/examples', exampleRoutes);
 
+// Health Check Endpoint
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'UP' });
+});
+
 // Error Handling Middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).json({ message: 'Internal Server Error' });
+    const statusCode = err.status || 500;
+    const message = statusCode === 500 ? 'Internal Server Error' : err.message;
+    res.status(statusCode).json({ message });
+});
+
+// Add a global catch-all route for unknown routes
+app.use((req, res) => {
+    res.status(404).json({ message: 'Not Found' });
 });
 
 module.exports = app;

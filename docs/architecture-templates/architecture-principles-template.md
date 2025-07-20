@@ -1,23 +1,41 @@
 # Architecture Principles Template
 
-Title
+## Title
 
-Insert the title of the architecture principle here
+[Insert the title of the architecture principle here.]
 
-Purpose - Describe the purpose of this architecture principle. Why does it exist? What problems does it aim to solve?
+## Purpose
 
-Scope - Define the scope of the principle. What areas of the enterprise does it apply to?
+- **Description:** [Describe the purpose of this architecture principle. Why does it exist? What problems does it aim to solve?]
 
-Principle Statement - State the principle succinctly. This should be a clear and declarative statement.
+## Scope
 
-Rationale - Explain the reasoning behind the principle. Why is it important? What benefits does it provide?
+- **Definition:** [Define the scope of the principle. What areas of the enterprise does it apply to?]
 
-Implications - List the implications of adopting this principle. How will it affect the organization, architecture, and stakeholders?
+## Principle Statement
 
-Related Principles - Mention any related architecture principles that connect or support this principle.
+- **Statement:** [State the principle succinctly. This should be a clear and declarative statement.]
 
-Examples - Provide examples that illustrate how this principle can be applied in practice.
+## Rationale
 
-Compliance - Define how compliance with this principle will be measured and enforced.
+- **Reasoning:** [Explain the reasoning behind the principle. Why is it important? What benefits does it provide?]
 
-References - List any references or documents that provide additional context or information related to this principle.
+## Implications
+
+- **Impact:** [List the implications of adopting this principle. How will it affect the organization, architecture, and stakeholders?]
+
+## Related Principles
+
+- **Connections:** [Mention any related architecture principles that connect or support this principle.]
+
+## Examples
+
+- **Illustrations:** [Provide examples that illustrate how this principle can be applied in practice.]
+
+## Compliance
+
+- **Measurement:** [Define how compliance with this principle will be measured and enforced.]
+
+## References
+
+- **Additional Context:** [List any references or documents that provide additional context or information related to this principle.]

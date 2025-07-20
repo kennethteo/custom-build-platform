@@ -48,6 +48,8 @@ Key features include:
 3. Integration and API Strategy
 4. Well-Architected Framework
 
+Refer to [Strategy](strategy)
+
 ## 2. High-Level Architecture Overview
 
 ### Visual Overview

@@ -2,7 +2,7 @@
 
 This document describes the Control Plane, its responsibilities, components, and operational flows.
 
-## Capabilities
+## Features
 
 - Admin User Management
 - Tenant Management

@@ -2,7 +2,7 @@
 
 This document describes the Developer Plane, including tools, workflows, and environments provided to developers.
 
-## Key Features
+## Features
 
 - Development environments
 - Build and deployment tools

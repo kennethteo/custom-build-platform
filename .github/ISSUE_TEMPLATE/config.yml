@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 📖 Documentation
+    url: https://github.com/kennethteo/custom-build-platform/tree/main/docs
+    about: Browse the comprehensive documentation and architecture guides
+  - name: 🚀 Quick Start Guide
+    url: https://github.com/kennethteo/custom-build-platform#-quick-start
+    about: Get started quickly with the platform templates
+  - name: 💬 Discussions
+    url: https://github.com/kennethteo/custom-build-platform/discussions
+    about: Ask questions and discuss ideas with the community

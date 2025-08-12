@@ -58,6 +58,8 @@ Include a diagram that illustrates the architecture of the proposed solution.
 
 The architecture includes modular components designed for scalability, security, and interoperability. Key components include APIs, databases, and integration layers.
 
+
+
 ## 5. Solution Components
 
 ### 5.1 Component List

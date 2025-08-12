@@ -161,30 +161,3 @@ Key features include:
 5. **Resource Plane**: This sub-plane manages infrastructure resources such as compute, storage, and networking. It ensures optimal resource allocation and scalability to meet application demands.
 
 The Developer Plane is designed to be intuitive and developer-friendly, enabling teams to work efficiently while maintaining high standards of quality and security. By providing robust tools and resources, the platform fosters innovation and collaboration, ensuring that developers can deliver impactful solutions that meet business objectives.
-
-## 3. Technology Stack
-
-The platform leverages a modern, modular technology stack to ensure scalability, maintainability, and developer productivity.
-
-- **Languages & Frameworks**:  
-  - Node.js (Express.js), .NET, Java, Python, Go
-- **Frontend**:  
-  - React, Angular, or Vue.js (for digital experience applications)
-- **Databases**:  
-  - MongoDB (primary NoSQL), PostgreSQL (relational), Redis (caching/session)
-- **API & Integration**:  
-  - RESTful APIs, GraphQL, OpenAPI/Swagger for documentation
-- **Authentication & Authorization**:  
-  - OAuth2, JWT, SAML, OpenID Connect
-- **DevOps & CI/CD**:  
-  - GitHub Actions, Docker, Kubernetes, Helm, pm2
-- **Testing & Quality**:  
-  - Jest, Mocha, Supertest (Node.js), xUnit (.NET), JUnit (Java), Pytest (Python)
-- **Monitoring & Logging**:  
-  - Prometheus, Grafana, ELK Stack, Winston, Morgan
-- **Messaging & Eventing**:  
-  - RabbitMQ, Kafka
-- **Other Tools**:  
-  - ESLint, Prettier, dotenv, nodemon, Swagger UI, Joi, Lodash, Moment/date-fns
-
-## 4. Governance

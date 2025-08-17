@@ -43,10 +43,13 @@ Key features include:
 
 ### Implementation through Key Strategies
 
-1. Cloud-Native and Containerized Strategy
-2. Microservices Architecture Strategy
+1. Cloud-Native Approach
+2. Microservices Architecture
 3. Integration and API Strategy
-4. Well-Architected Framework
+4. Event Driven Architecture / Asynchronous over Synchronous
+5. SaaS and Containerization Strategy
+6. Fit for Purpose Database Architecture
+7. Well-Architected Framework
 
 Refer to [Strategy](strategy)
 

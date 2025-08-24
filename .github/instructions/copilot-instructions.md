@@ -126,3 +126,8 @@ Coding standards, domain knowledge, and preferences that AI should follow.
 ---
 - All code templates will go to `app-templates/go/` folder
 - go to go.instructions.md for detailed instructions.
+
+### PostgreSQL Instructions
+---
+- All Dockerfiles and setup scripts will go to `infrastructure/postgresql/` folder
+- go to postgresql.instructions.md for detailed instructions.

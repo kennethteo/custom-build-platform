@@ -1,0 +1,128 @@
+name: 📖 User Story
+description: Submit a user story for the Custom Build Platform
+title: "[User Story]: "
+labels: ["user-story", "enhancement"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## User Story Submission
+        
+        Thank you for contributing a user story to the Custom Build Platform! This template helps ensure we capture all the necessary details to understand and implement your requirements.
+        
+        Please fill out the sections below to describe your user story in a structured format.
+
+  - type: input
+    id: feature
+    attributes:
+      label: Feature Area
+      description: Which part of the platform does this user story relate to?
+      placeholder: e.g., Application Templates, Architecture Guides, DevSecOps, Infrastructure, Documentation
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User Story
+      description: Describe the user story in the standard format
+      placeholder: |
+        As a [user role],
+        I want to [do something],
+        So that [I achieve some goal].
+      value: |
+        **As a** [user role],
+        **I want to** [do something],
+        **So that** [I achieve some goal].
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: List the specific criteria that must be met for this user story to be considered complete
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+        - [ ] Criterion 3
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: What is the priority level of this user story?
+      options:
+        - High
+        - Medium
+        - Low
+      default: 1
+    validations:
+      required: true
+
+  - type: input
+    id: story-points
+    attributes:
+      label: Estimated Story Points
+      description: If you have an estimate, what would you assign for story points? (optional)
+      placeholder: e.g., 1, 2, 3, 5, 8, 13
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: List any dependencies this user story has on other features, technologies, or external systems
+      placeholder: |
+        - Dependency 1
+        - Dependency 2
+
+  - type: textarea
+    id: assumptions
+    attributes:
+      label: Assumptions
+      description: List any assumptions you're making about this user story
+      placeholder: |
+        - Assumption 1
+        - Assumption 2
+
+  - type: dropdown
+    id: target-technology
+    attributes:
+      label: Target Technology/Platform
+      description: Which technology or platform does this user story primarily target?
+      options:
+        - .NET Core
+        - Node.js
+        - React
+        - Java
+        - Go
+        - Python
+        - Infrastructure/DevOps
+        - Documentation
+        - Platform General
+        - Multiple Technologies
+      default: 8
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any additional context, mockups, examples, or references that would help understand this user story
+      placeholder: |
+        Provide any additional information, links to related issues, mockups, or examples that would help the development team understand and implement this user story.
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      description: Please confirm the following
+      options:
+        - label: I have searched existing issues to ensure this user story hasn't already been submitted
+          required: true
+        - label: This user story is related to the Custom Build Platform project
+          required: true
+        - label: I have provided sufficient detail for the development team to understand the requirements
+          required: true

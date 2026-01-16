@@ -1,0 +1,105 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement for the platform
+title: "[Feature]: "
+labels: ["enhancement", "feature-request"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request
+        
+        Thank you for suggesting a new feature! Your ideas help make the Custom Build Platform better for everyone.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feature Category
+      description: What category does this feature relate to?
+      options:
+        - New Application Template
+        - Existing Template Enhancement
+        - Architecture Documentation
+        - DevSecOps Tools
+        - Infrastructure Templates
+        - Platform Tooling
+        - Documentation Improvement
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: Is your feature request related to a problem? Please describe.
+      placeholder: A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: Describe the solution you'd like
+      placeholder: A clear and concise description of what you want to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternative Solutions
+      description: Describe alternatives you've considered
+      placeholder: A clear and concise description of any alternative solutions or features you've considered.
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: What is the priority level of this feature?
+      options:
+        - High
+        - Medium
+        - Low
+      default: 1
+
+  - type: checkboxes
+    id: target-technologies
+    attributes:
+      label: Target Technologies
+      description: Which technologies should this feature support? (Select all that apply)
+      options:
+        - label: .NET Core
+        - label: Node.js
+        - label: React
+        - label: Java
+        - label: Go
+        - label: Python
+        - label: Infrastructure/DevOps
+        - label: All Technologies
+
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: Use Cases
+      description: Describe specific use cases where this feature would be valuable
+      placeholder: |
+        - Use case 1: ...
+        - Use case 2: ...
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any other context, mockups, or examples about the feature request here
+
+  - type: checkboxes
+    id: commitment
+    attributes:
+      label: Contribution
+      description: Would you be interested in contributing to this feature?
+      options:
+        - label: I would be willing to help implement this feature
+        - label: I would be willing to help test this feature
+        - label: I would be willing to help document this feature
